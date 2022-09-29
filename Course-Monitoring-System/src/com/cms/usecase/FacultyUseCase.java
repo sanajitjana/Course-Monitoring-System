@@ -1,5 +1,6 @@
 package com.cms.usecase;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.cms.bean.Faculty;
@@ -98,11 +99,11 @@ public class FacultyUseCase {
 		faculty.setEmail(email);
 		faculty.setUsername(username);
 		faculty.setPassword(password);
-		
+
 		try {
 			String result = dao.registerFaculty(faculty);
 			System.out.println(result);
-			
+
 		} catch (FacultyException e) {
 			// TODO Auto-generated catch block
 
@@ -112,19 +113,19 @@ public class FacultyUseCase {
 			System.out.println("Try again...");
 			UserActivity.facultyOptions();
 
-		}		
+		}
 
 		UserActivity.facultyOptions();
 	}
 
 	public static void facultyUpdateById() {
-		
+
 		Scanner sc = new Scanner(System.in);
 		System.out.println("\nEnter faculty ID to update - ");
-		
+
 		System.out.println("Enter the faculty id :");
 		int id = sc.nextInt();
-		
+
 		System.out.println("Enter new name :");
 		String name = sc.next();
 
@@ -156,8 +157,8 @@ public class FacultyUseCase {
 		String result;
 		try {
 			result = dao.upadteFacultyById(id, faculty);
-			System.out.println("\n"+result);
-			
+			System.out.println("\n" + result);
+
 		} catch (FacultyException e) {
 			// TODO Auto-generated catch block
 
@@ -167,25 +168,69 @@ public class FacultyUseCase {
 			System.out.println("Try again...");
 			UserActivity.facultyOptions();
 
-		}		
+		}
 
 		UserActivity.facultyOptions();
-		
+
 	}
 
 	public static void facultyView() {
+
+		try {
+
+			List<Faculty> faculties = new FacultyDaoImp().viewAllFaculty();
+
+			faculties.forEach(f -> {
+
+				System.out.println("Faculty ID : " + f.getFacultyId());
+				System.out.println("Faculty Name :" + f.getFacultyName());
+				System.out.println("Faculty Address : " + f.getFacultyAddress());
+				System.out.println("Faculty Mobile : " + f.getMobile());
+				System.out.println("Faculty Email : " + f.getEmail());
+				System.out.println("Faculty Username : " + f.getUsername());
+				System.out.println("Faculty Password : " + f.getPassword());
+
+				System.out.println("==================================");
+			});
+
+		} catch (FacultyException e) {
+			System.out.println(e.getMessage());
+
+			System.out.println();
+			System.out.println("Try again...");
+			UserActivity.facultyOptions();
+
+		}
+
+		UserActivity.facultyOptions();
 
 	}
 
 	public static void facultyDeleteById() {
 
+		try {
+			
+			String response = new FacultyDaoImp().deleteFacultyById();
+			System.out.println("\n"+response);
+			
+			
+		} catch (FacultyException e) {
+			System.out.println(e.getMessage());
+
+			System.out.println();
+			System.out.println("Try again...");
+			UserActivity.facultyOptions();
+
+		}
+
+		UserActivity.facultyOptions();
+
 	}
 
-	
 	public static void fillUpDayWisePlanner() {
 		System.out.println("\nFill up day wise planner");
 	}
-	
+
 	public static void updateFacultyPassword() {
 		System.out.println("\nUpdate faculty password");
 	}

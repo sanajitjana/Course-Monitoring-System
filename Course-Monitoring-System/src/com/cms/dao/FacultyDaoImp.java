@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.cms.bean.Faculty;
@@ -80,7 +81,7 @@ public class FacultyDaoImp implements FacultyDao {
 			int res = ps.executeUpdate();
 
 			if (res > 0) {
-				message = "Faculty registered successful!";
+				message = "Faculty register successfully!";
 			}
 
 		} catch (SQLException e) {
@@ -120,7 +121,7 @@ public class FacultyDaoImp implements FacultyDao {
 				int res = ps.executeUpdate();
 
 				if (res > 0) {
-					message = "Faculty update successful!";
+					message = "Faculty update successfully!";
 				}
 
 			} else {
@@ -130,14 +131,61 @@ public class FacultyDaoImp implements FacultyDao {
 		} catch (SQLException e) {
 			throw new FacultyException(e.getMessage());
 		}
-		
+
 		return message;
 	}
 
 	@Override
-	public List<Faculty> viewAllFacultyDetails() throws FacultyException {
+	public List<Faculty> viewAllFaculty() throws FacultyException {
 		// TODO Auto-generated method stub
-		return null;
+
+		List<Faculty> faculties = new ArrayList<Faculty>();
+
+		try (Connection conn = DBUtil.provideConnection()) {
+
+			PreparedStatement ps = conn.prepareStatement("select * from faculty");
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+
+				int id = rs.getInt("facultyId");
+				String name = rs.getString("facultyName");
+				String address = rs.getString("facultyAddress");
+				String mobile = rs.getString("mobile");
+				String email = rs.getString("email");
+				String username = rs.getString("username");
+				String password = "********";
+
+				Faculty faculty = new Faculty();
+				
+				faculty.setFacultyId(id);
+				faculty.setFacultyName(name);
+				faculty.setFacultyAddress(address);
+				faculty.setMobile(mobile);
+				faculty.setEmail(email);
+				faculty.setUsername(username);
+				faculty.setPassword(password);
+
+				faculties.add(faculty);
+			}
+
+		} catch (SQLException e) {
+			throw new FacultyException(e.getMessage());
+		}
+
+		if (faculties.size() == 0)
+			throw new FacultyException("No Faculty Found!");
+
+		return faculties;
+
+	}
+
+	@Override
+	public String deleteFacultyById() throws FacultyException {
+
+		String message="You doesn't have permission to delete";
+
+		return message;
 	}
 
 }

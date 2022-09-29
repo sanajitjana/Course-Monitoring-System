@@ -52,7 +52,7 @@ public class UserActivity {
 
 	public static void adminOptions() {
 		
-		System.out.println("Choose an options - ");
+		System.out.println("\nChoose an options - ");
 		System.out.println("1. Course (Create,Update,View)\r\n"
 				+ "2. Batch (Create,Update,View) (A batch is related to a course.) \r\n"
 				+ "3. Faculty (Create,Update,View)\r\n" + "4. Allocate faculty to a batch.\r\n"
@@ -109,9 +109,52 @@ public class UserActivity {
 	}
 
 	public static void courseOptions() {
+		
+		System.out.println("\nCreate, Update, View Course.");
+		
+		System.out.println("\nChoose an options - \r\n" + "1. Create Course\r\n" + "2. Update Course by Name\r\n"
+				+ "3. View All Courses\r\n" + "4. Delete Course by Name\r\n" + "5. Exit (Get Admin Options)");
 
-		System.out.println();
-		System.out.println("Create, Update, View Course.");
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("\nEnter any number from above:");
+
+		int choice = 0;
+		try {
+			choice = sc.nextInt();
+		} catch (InputMismatchException e) {
+
+			System.out.println("Invalid input!");
+
+			System.out.println();
+			System.out.println("Try again...");
+
+			UserActivity.courseOptions();
+		}
+
+		switch (choice) {
+		case 1:
+			CourseUseCase.courseCreate();
+			break;
+		case 2:
+			CourseUseCase.courseUpdateByName();
+			break;
+		case 3:
+			CourseUseCase.courseViewAll();
+			break;
+		case 4:
+			CourseUseCase.facultyDeleteByName();
+			break;
+		case 5:
+			UserActivity.adminOptions();
+			break;
+		default:
+			System.out.println("Invalid choice!");
+			System.out.println();
+
+			System.out.println("Try again...");
+			UserActivity.courseOptions();
+		}
 
 	}
 

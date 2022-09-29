@@ -7,24 +7,23 @@ import com.cms.bean.Faculty;
 import com.cms.exceptions.FacultyException;
 
 public interface FacultyDao {
-	
-	//login faculty
-	public Faculty loginFaculty(String username,String password)throws FacultyException;
-	
-	
-	//logout faculty
+
+	// login faculty
+	public Faculty loginFaculty(String username, String password) throws FacultyException;
+
+	// logout faculty
 	public void logoutFaculty() throws FacultyException;
-	
-	
-	//register faculty
+
+	// register faculty
 	public String registerFaculty(Faculty faculty) throws FacultyException;
-		
-		
-	//update faculty by id
+
+	// update faculty by id
 	public String upadteFacultyById(int id, Faculty faculty) throws FacultyException;
-		
-		
-	//view all faculty details
-	public List<Faculty> viewAllFacultyDetails()throws FacultyException;
+
+	// view all faculty details
+	public List<Faculty> viewAllFaculty() throws FacultyException;
+
+	// delete faculty by id
+	public String deleteFacultyById() throws FacultyException;
 
 }

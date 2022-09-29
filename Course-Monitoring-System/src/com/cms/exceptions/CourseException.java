@@ -6,7 +6,7 @@ public class CourseException extends Exception{
 		// TODO Auto-generated constructor stub
 	}
 	
-	CourseException(String message){
+	public CourseException(String message){
 		super(message);
 	}
 	
