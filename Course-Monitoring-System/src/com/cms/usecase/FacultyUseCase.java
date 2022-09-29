@@ -2,19 +2,19 @@ package com.cms.usecase;
 
 import java.util.Scanner;
 
-import com.cms.bean.Admin;
-import com.cms.dao.AdminDao;
 import com.cms.dao.AdminDaoImp;
+import com.cms.dao.FacultyDaoImp;
 import com.cms.exceptions.AdminException;
+import com.cms.exceptions.FacultyException;
 import com.cms.start.UserActivity;
 
-public class AdminUseCase {
+public class FacultyUseCase {
 
-	public static void adminLogin() {		
+	public static void facultyLogin() {		
 
 		Scanner sc = new Scanner(System.in);
 
-		System.out.println("Enter admin details -");
+		System.out.println("Enter faculty details -");
 		System.out.println("Enter Username: ");
 		String username = sc.next();
 
@@ -22,16 +22,16 @@ public class AdminUseCase {
 		String password = sc.next();
 		
 		try {
-			new AdminDaoImp().loginAdmin(username, password);
+			new FacultyDaoImp().loginFaculty(username, password);
 			
 			System.out.println();
 			System.out.println("Welcome! Login Successful...");
 			
 			System.out.println();
-			UserActivity.adminOptions();
+			UserActivity.facultyOptions();
 			
 
-		} catch (AdminException e) {
+		} catch (FacultyException e) {
 			System.out.println(e.getMessage());
 			
 			System.out.println();
@@ -41,7 +41,7 @@ public class AdminUseCase {
 
 	}
 	
-	public static void adminLogout() {
+	public static void facultyLogout() {
 		
 		System.out.println("Are you sure? y/n");
 		
@@ -50,8 +50,8 @@ public class AdminUseCase {
 		
 		if(choice.equalsIgnoreCase("y")) {
 			try {
-				new AdminDaoImp().logoutAdmin();
-			} catch (AdminException e) {				
+				new FacultyDaoImp().logoutFaculty();
+			} catch (FacultyException e) {				
 				System.out.println(e.getMessage());
 			}
 			
@@ -61,7 +61,7 @@ public class AdminUseCase {
 			System.out.println("Try again...");
 			System.out.println();
 			
-			UserActivity.adminOptions();
+			UserActivity.facultyOptions();
 		}
 		
 	}

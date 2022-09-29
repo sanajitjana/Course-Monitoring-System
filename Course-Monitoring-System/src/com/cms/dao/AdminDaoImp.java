@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import com.cms.bean.Admin;
 import com.cms.exceptions.AdminException;
+import com.cms.start.UserActivity;
 import com.cms.utility.DBUtil;
 
 public class AdminDaoImp implements AdminDao{
@@ -45,8 +46,12 @@ public class AdminDaoImp implements AdminDao{
 		return admin;
 	}
 
-	
-
-	
+	@Override
+	public void logoutAdmin() throws AdminException{
+		// TODO Auto-generated method stub
+		
+		//redirect to previous menu
+		UserActivity.selectUser();
+	}	
 
 }

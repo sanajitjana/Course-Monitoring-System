@@ -5,50 +5,51 @@ import java.util.Scanner;
 
 import com.cms.usecase.AdminUseCase;
 import com.cms.usecase.CourseUseCase;
+import com.cms.usecase.FacultyUseCase;
 
 public class UserActivity {
 
 	public static void selectUser() {
-		
+
 		Scanner sc = new Scanner(System.in);
 
 		System.out.println();
-		System.out.println("Choose an options - \n1. Admin Login\n2. Faculty Login\n3. Faculty Register");
+		System.out
+				.println("Choose an options - \n" + "1. Admin Login\n" + "2. Faculty Login\n" + "3. Faculty Register");
 
 		System.out.println();
 		System.out.println("Enter any number from above: ");
-		
-		int choice=0;
-		try {		
+
+		int choice = 0;
+		try {
 			choice = sc.nextInt();
 		} catch (InputMismatchException e) {
-			
+
 			System.out.println("Invalid input!");
-			
+
 			System.out.println();
 			System.out.println("Try again...");
-			
+
 			UserActivity.selectUser();
 		}
-		
 
 		switch (choice) {
 		case 1:
 			AdminUseCase.adminLogin();
 			break;
 		case 2:
-			CourseUseCase.createFaculty();
+			FacultyUseCase.facultyLogin();
 			break;
 		case 3:
-			System.out.println("Admin login required!");
+			System.out.println("Admin login require!");
 			AdminUseCase.adminLogin();
 			break;
 		default:
 			System.out.println("Invalid choice!");
 			System.out.println();
-			
+
 			System.out.println("Try again...");
-			UserActivity.selectUser();			
+			UserActivity.selectUser();
 		}
 	}
 
@@ -58,8 +59,8 @@ public class UserActivity {
 		System.out.println("1. Create, Update, View Course.\r\n"
 				+ "2. Create, Update, View Batch. (A batch is related to a course.) \r\n"
 				+ "3. Create, Update, View Faculty.\r\n" + "4. Allocate faculty to a batch.\r\n"
-				+ "5. Create, Update, View Course plan.\r\n" + "6. View the Day wise update of every batch.\r\n"
-				+ "7. Generate Report for every batch.\r\n"+"8. Exit (Admin Logout)");
+				+ "5. Create, Update, and View Course plan.\r\n" + "6. View the Day wise update of every batch.\r\n"
+				+ "7. Generate Report for every batch.\r\n" + "8. Exit (Admin Logout)");
 
 		System.out.println();
 		System.out.println("Enter any number from above");
@@ -103,7 +104,7 @@ public class UserActivity {
 		default:
 			System.out.println("Invalid choice!");
 			System.out.println();
-			
+
 			System.out.println("Try again...");
 			UserActivity.adminOptions();
 		}
@@ -123,15 +124,14 @@ public class UserActivity {
 		System.out.println("Create, Update, View Batch. (A batch is related to a course.)");
 
 	}
-	
+
 	public static void facultyOptions() {
 
 		System.out.println();
 		System.out.println("Create, Update, View Faculty.");
 
 	}
-	
-	
+
 	public static void allocateFacultyToBatch() {
 
 		System.out.println();
@@ -139,30 +139,25 @@ public class UserActivity {
 
 	}
 
-	
-	
 	public static void coursePlanOptions() {
 
 		System.out.println();
 		System.out.println("Create, Update, View Faculty.");
 
 	}
-	
-	
+
 	public static void dayWiseUpdateBatch() {
 
 		System.out.println();
 		System.out.println("View the Day wise update of every batch.");
 
 	}
-	
-	
+
 	public static void reportForBatch() {
 
 		System.out.println();
 		System.out.println("Generate Report for every batch.");
 
 	}
-	
 
 }
