@@ -2,8 +2,6 @@ package com.cms.usecase;
 
 import java.util.Scanner;
 
-import com.cms.bean.Admin;
-import com.cms.dao.AdminDao;
 import com.cms.dao.AdminDaoImp;
 import com.cms.exceptions.AdminException;
 import com.cms.start.UserActivity;
@@ -19,7 +17,8 @@ public class AdminUseCase {
 		String username = sc.next();
 
 		System.out.println("Enter Password: ");
-		String password = sc.next();
+		String password = sc.next();	
+		
 		
 		try {
 			new AdminDaoImp().loginAdmin(username, password);
