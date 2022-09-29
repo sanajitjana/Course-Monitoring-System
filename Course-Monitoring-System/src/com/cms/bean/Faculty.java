@@ -1,15 +1,15 @@
 package com.cms.bean;
 
 public class Faculty {
-	
+
 	private int facultyId;
 	private String facultyName;
 	private String facultyAddress;
 	private String mobile;
 	private String email;
 	private String username;
-	private String password;	
-	
+	private String password;
+
 	public Faculty(int facultyId, String facultyName, String facultyAddress, String mobile, String email,
 			String username, String password) {
 		super();
@@ -87,7 +87,5 @@ public class Faculty {
 		return "Faculty [facultyId=" + facultyId + ", facultyName=" + facultyName + ", facultyAddress=" + facultyAddress
 				+ ", mobile=" + mobile + ", email=" + email + ", username=" + username + ", password=" + password + "]";
 	}
-	
-	
 
 }

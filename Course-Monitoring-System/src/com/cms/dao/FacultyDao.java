@@ -17,11 +17,11 @@ public interface FacultyDao {
 	
 	
 	//register faculty
-	public String registerFaculty(Faculty faculty);
+	public String registerFaculty(Faculty faculty) throws FacultyException;
 		
 		
 	//update faculty by id
-	public String upadteFacultyById(int id) throws FacultyException;
+	public String upadteFacultyById(int id, Faculty faculty) throws FacultyException;
 		
 		
 	//view all faculty details
