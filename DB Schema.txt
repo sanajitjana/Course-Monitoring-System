@@ -1,0 +1,117 @@
+Tables:
+--------------------------------
+
+
+Admin:
+•	username
+•	password:
+
+
+
+create table admin
+(
+id int PRIMARY KEY AUTO_INCREMENT,
+username varchar(255) NOT NULL UNIQUE,
+password varchar(255) NOT NULL
+);
+
+
+
+
+
+Faculty:
+•	facultyid
+•	facultyName
+•	facultyAddress
+•	mobile
+•	email 
+•	username
+•	password
+
+
+
+
+create table faculty
+(
+facultyId int PRIMARY KEY AUTO_INCREMENT,
+facultyName varchar(255),
+facultyAddress varchar(255),
+mobile varchar(10),
+email varchar(255),
+username varchar(255) NOT NULL UNIQUE,
+password varchar(255) NOT NULL
+);
+
+
+
+
+
+Course:
+•	courseId
+•	courseName
+•	fee
+•	courseDescription
+
+
+
+create table course
+(
+courseId int PRIMARY KEY AUTO_INCREMENT,
+courseName varchar(255) UNIQUE,
+fee int,
+courseDescription text
+);
+
+
+
+
+Batch:
+•	batchId:
+•	courseId:
+•	facultyId:
+•	numberofStudents;
+•	batchstartDate
+•	duration 
+
+
+
+create table batch
+(
+batchId int PRIMARY KEY AUTO_INCREMENT,
+courseId int NOT NULL,
+facultyId int NOT NULL,
+numberOfStudents int,
+batchStartDate date,
+duration varchar(255),
+foreign key(courseId) references course(courseId) ON DELETE CASCADE,
+foreign key(facultyId) references faculty(facultyId) ON DELETE CASCADE
+);
+
+
+
+CoursPlan:
+•	planId
+•	batchId
+•	dayNumber
+•	topic
+•	status: completed/pending
+
+
+
+
+create table coursPlan
+(
+planId int PRIMARY KEY AUTO_INCREMENT,
+batchId int NOT NULL,
+dayNumber int,
+topic varchar(255),
+status varchar(255),
+foreign key(batchId) references batch(batchId) ON DELETE CASCADE
+);
+
+
+
+
+
+
+
