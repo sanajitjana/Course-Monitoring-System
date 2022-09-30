@@ -141,7 +141,7 @@ public class CourseDaoImp implements CourseDao {
 		}
 
 		if (courses.size() == 0)
-			throw new CourseException("Course Not Found!");
+			throw new CourseException("Empty!");
 
 		return courses;
 

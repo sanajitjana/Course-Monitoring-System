@@ -186,7 +186,7 @@ public class BatchDaoImp implements BatchDao {
 		}
 
 		if (batches.size() == 0)
-			throw new BatchException("Batch Not Found!");
+			throw new BatchException("Empty!");
 
 		return batches;
 

@@ -174,7 +174,7 @@ public class FacultyDaoImp implements FacultyDao {
 		}
 
 		if (faculties.size() == 0)
-			throw new FacultyException("Faculty Not Found!");
+			throw new FacultyException("Empty!");
 
 		return faculties;
 

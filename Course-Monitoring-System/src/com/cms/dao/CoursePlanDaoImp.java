@@ -13,7 +13,29 @@ import com.cms.exceptions.CourseException;
 import com.cms.exceptions.CoursePlanException;
 import com.cms.utility.DBUtil;
 
-public class CoursePlanImp implements CoursePlanDao {
+public class CoursePlanDaoImp implements CoursePlanDao {
+
+	@Override
+	public boolean isBatchIdAvailable(int id) throws CoursePlanException {
+
+		boolean result = false;
+
+		try (Connection conn = DBUtil.provideConnection()) {
+
+			PreparedStatement pss = conn.prepareStatement("select * from batch where batchId=?");
+
+			pss.setInt(1, id);
+			ResultSet rs = pss.executeQuery();
+
+			if (rs.next()) {
+				result = true;
+			}
+		} catch (SQLException e) {
+			throw new CoursePlanException(e.getMessage());
+		}
+
+		return result;
+	}
 
 	@Override
 	public String createCoursePlan(CoursePlan coursePlan) throws CoursePlanException {
@@ -44,8 +66,9 @@ public class CoursePlanImp implements CoursePlanDao {
 		return message;
 	}
 
+
 	@Override
-	public boolean isCoursePlanIdAvailable(int id) throws CoursePlanException {
+	public boolean isPlanIdAvailable(int id) throws CoursePlanException {
 
 		boolean result = false;
 
@@ -110,7 +133,6 @@ public class CoursePlanImp implements CoursePlanDao {
 
 	@Override
 	public List<CoursePlan> viewAllCoursePlanDetails() throws CoursePlanException {
-		
 
 		List<CoursePlan> coursePlans = new ArrayList<CoursePlan>();
 		CoursePlan coursePlan = new CoursePlan();
@@ -126,7 +148,7 @@ public class CoursePlanImp implements CoursePlanDao {
 				int batchId = rs.getInt("batchId");
 				int dayNumber = rs.getInt("dayNumber");
 				String topic = rs.getString("topic");
-				String status = rs.getString("status");				
+				String status = rs.getString("status");
 
 				coursePlan.setPlanId(planId);
 				coursePlan.setBatchId(batchId);
@@ -142,7 +164,7 @@ public class CoursePlanImp implements CoursePlanDao {
 		}
 
 		if (coursePlans.size() == 0)
-			throw new CoursePlanException("Course Plan Not Found!");
+			throw new CoursePlanException("Empty!");
 
 		return coursePlans;
 

@@ -7,11 +7,14 @@ import com.cms.exceptions.CoursePlanException;
 
 public interface CoursePlanDao {
 
+	// check course plan id before checking
+	public boolean isBatchIdAvailable(int id) throws CoursePlanException;
+
 	// create course plan
 	public String createCoursePlan(CoursePlan coursePlan) throws CoursePlanException;
-	
-	// check course plan id before checking
-	public boolean isCoursePlanIdAvailable(int id) throws CoursePlanException;
+
+	// before updating check the planId is available or not
+	public boolean isPlanIdAvailable(int id) throws CoursePlanException;
 
 	// update course plan by id
 	public String upadteCoursePlanById(int id, CoursePlan coursePlan) throws CoursePlanException;

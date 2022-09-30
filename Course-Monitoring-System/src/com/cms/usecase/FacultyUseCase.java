@@ -237,6 +237,10 @@ public class FacultyUseCase {
 		UserActivity.facultyOptions();
 
 	}
+	
+	public static void viewCoursePlan() {
+		System.out.println("\nView the Course Plan");
+	}
 
 	public static void fillUpDayWisePlanner() {
 		System.out.println("\nFill up day wise planner");

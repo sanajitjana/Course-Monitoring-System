@@ -110,7 +110,8 @@ public class UserActivity {
 
 	public static void courseOptions() {
 
-		System.out.println("\nCreate, Update, View Course.");
+		System.out.println("\nCreate, Update, View Course");
+		System.out.println("----------------------------------");
 
 		System.out.println("\nChoose an options - \r\n" + "1. Create Course\r\n" + "2. Update Course by Name\r\n"
 				+ "3. View All Courses\r\n" + "4. Delete Course by Name\r\n" + "5. Exit (Get Admin Options)");
@@ -160,9 +161,11 @@ public class UserActivity {
 
 	public static void batchOptions() {
 
-		System.out.println(
-				"\nChoose an options - \r\n" + "1. Create Batch \r\n" + "2. Update Batch by Name\r\n"
-						+ "3. View All Batch\r\n" + "4. Delete the Batch\r\n"+ "5. Exit (Get Admin Options)");
+		System.out.println("\nCreate, Update and View Batch");
+		System.out.println("----------------------------------");
+
+		System.out.println("\nChoose an options - \r\n" + "1. Create Batch \r\n" + "2. Update Batch by Name\r\n"
+				+ "3. View All Batch\r\n" + "4. Delete the Batch\r\n" + "5. Exit (Get Admin Options)");
 
 		Scanner sc = new Scanner(System.in);
 
@@ -234,7 +237,7 @@ public class UserActivity {
 
 		switch (choice) {
 		case 1:
-			CoursePlanUseCase.viewCoursePlan();
+			FacultyUseCase.viewCoursePlan();
 			break;
 		case 2:
 			FacultyUseCase.fillUpDayWisePlanner();
@@ -257,7 +260,8 @@ public class UserActivity {
 
 	public static void facultyOptions() {
 
-		System.out.println("\nCreate, Update, View Faculty");
+		System.out.println("\nCreate, Update, View Faculty");		
+		System.out.println("----------------------------------");
 
 		System.out.println("\nChoose an options - \r\n" + "1. Create Faculty\r\n" + "2. Update Faculty by ID\r\n"
 				+ "3. View All Faculty\r\n" + "4. Delete Faculty by ID\r\n" + "5. Exit (Get Admin Options)");
@@ -314,8 +318,54 @@ public class UserActivity {
 
 	public static void coursePlanOptions() {
 
+		System.out.println("\nCreate, Update, View Course Plan");
+		System.out.println("----------------------------------");
+
+		System.out.println("\nChoose an options - \r\n" + "1. Create Course Plan\r\n"
+				+ "2. Update Course Plan by ID\r\n" + "3. View All Course Plan\r\n" + "4. Delete Course Plan by ID\r\n"
+				+ "5. Exit (Get Admin Options)");
+
+		Scanner sc = new Scanner(System.in);
+
 		System.out.println();
-		System.out.println("Create, Update, View Faculty.");
+		System.out.println("Enter any number from above:");
+
+		int choice = 0;
+		try {
+			choice = sc.nextInt();
+		} catch (InputMismatchException e) {
+
+			System.out.println("Invalid input!");
+
+			System.out.println();
+			System.out.println("Try again...");
+
+			UserActivity.coursePlanOptions();
+		}
+
+		switch (choice) {
+		case 1:
+			CoursePlanUseCase.createCoursePlan();
+			break;
+		case 2:
+			CoursePlanUseCase.coursePlanUpdateById();
+			break;
+		case 3:
+			CoursePlanUseCase.viewAllCoursePlans();
+			break;
+		case 4:
+			CoursePlanUseCase.coursePlanDeleteById();
+			break;
+		case 5:
+			UserActivity.adminOptions();
+			break;
+		default:
+			System.out.println("Invalid choice!");
+			System.out.println();
+
+			System.out.println("Try again...");
+			UserActivity.coursePlanOptions();
+		}
 
 	}
 

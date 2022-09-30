@@ -4,181 +4,273 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-import com.cms.bean.Course;
-import com.cms.dao.CourseDao;
-import com.cms.dao.CourseDaoImp;
-import com.cms.exceptions.CourseException;
+import com.cms.bean.CoursePlan;
+import com.cms.dao.CoursePlanDao;
+import com.cms.dao.CoursePlanDaoImp;
+import com.cms.exceptions.CoursePlanException;
 import com.cms.start.UserActivity;
 
 public class CoursePlanUseCase {
 
-	public static void courseCreate() {
+	public static void createCoursePlan() {
 
-		CourseDao dao = new CourseDaoImp();
-		Course course = new Course();
+		CoursePlanDao dao = new CoursePlanDaoImp();
+		CoursePlan coursePlan = new CoursePlan();
 
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter course details - ");
-
-		System.out.println("Enter course name");
-		String name = sc.next();
+		System.out.println("Enter course plan details - ");
 
 		try {
-			boolean res = dao.isNameUnique(name);
-			
-			if (res) {
-				System.out.println("\nThis course name already exists!");
 
-				System.out.println("\nTry again...");
-				UserActivity.courseOptions();
+			System.out.println("Enter batch id");
+			int batchId = sc.nextInt();
+
+			try {
+				boolean res = dao.isBatchIdAvailable(batchId);
+
+				if (res == false) {
+					System.out.println("\nThis batch id doesn't exists!");
+
+					System.out.println("\nTry again...");
+					UserActivity.coursePlanOptions();
+				}
+
+			} catch (CoursePlanException e1) {
+				// TODO Auto-generated catch block
+				System.out.println(e1.getMessage());
 			}
 
-		} catch (CourseException e1) {
-			// TODO Auto-generated catch block			
-			System.out.println(e1.getMessage());
-		}
+			System.out.println("Enter day number of week between(1-7)");
+			int dayNumber = sc.nextInt();
 
-		int fee = 0;
-		try {
+			if ((dayNumber < 1) || (dayNumber > 7)) {
 
-			System.out.println("Enter course fee");
-			fee = sc.nextInt();
+				System.out.println("\nInvalid entry (choose between 1 to 7)");
+
+				System.out.println("\nTry again...");
+				UserActivity.coursePlanOptions();
+			}
+
+			System.out.println("Enter course plan topic");
+			String topic = sc.next();
+
+			// select status for course plan
+			System.out.println("Choose course plan status\r\n" + "1. Completed\r\n" + "2. Pending");
+			int status = sc.nextInt();
+
+			while (status != 1 || status != 2) {
+
+				System.out.println("\nWrong choice");
+				System.out.println("\nTry again...");
+
+				System.out.println("Choose course plan status\r\n" + "1. Completed\r\n" + "2. Pending");
+				status = sc.nextInt();
+
+				if (status == 1 || status == 2)
+					break;
+			}
+
+			String statusText = null;
+			if (status == 1)
+				statusText = "completed";
+			else
+				statusText = "pending";
+
+			coursePlan.setBatchId(batchId);
+			coursePlan.setDayNumber(dayNumber);
+			coursePlan.setTopic(topic);
+			coursePlan.setStatus(statusText);
 
 		} catch (InputMismatchException e) {
 			// TODO Auto-generated catch block
 
-			System.out.println("\nCourse fee is numeric!");
+			System.out.println("\nInvalid data-type");
 
 			System.out.println("\nTry again...");
-			UserActivity.courseOptions();
+			UserActivity.coursePlanOptions();
 		}
 
-		System.out.println("Enter course description");
-		String description = sc.next();
-
-		course.setCourseName(name);
-		course.setFee(fee);
-		course.setCourseDescription(description);
-
 		try {
-			String result = dao.createCourse(course);
+			String result = dao.createCoursePlan(coursePlan);
 			System.out.println("\n" + result);
 
-		} catch (CourseException e) {
+		} catch (CoursePlanException e) {
 			// TODO Auto-generated catch block
 
 			System.out.println("\n" + e.getMessage());
 
 			System.out.println("\nTry again...");
-			UserActivity.courseOptions();
+			UserActivity.coursePlanOptions();
 
 		}
 
-		UserActivity.courseOptions();
+		UserActivity.coursePlanOptions();
 
 	}
 
-	public static void courseUpdateByName() {
+	public static void coursePlanUpdateById() {
+
+		CoursePlanDao dao = new CoursePlanDaoImp();
+		CoursePlan coursePlan = new CoursePlan();
 
 		Scanner sc = new Scanner(System.in);
-		System.out.println("\nEnter course name to update - ");
+		System.out.println("\nEnter course plan id to update - ");
 
-		System.out.println("Enter old course name");
-		String old_name = sc.next();
-
-		System.out.println("Enter new course name");
-		String new_name = sc.next();
-
-		int fee = 0;
+		int planId=0;
 		try {
 
-			System.out.println("Enter new fee");
-			fee = sc.nextInt();
+			System.out.println("Enter course-plan id");
+			planId = sc.nextInt();
+
+			try {
+				boolean res = dao.isPlanIdAvailable(planId);
+
+				if (res == false) {
+					System.out.println("\nThis planId id doesn't exists!");
+
+					System.out.println("\nTry again...");
+					UserActivity.coursePlanOptions();
+				}
+
+			} catch (CoursePlanException e1) {
+				// TODO Auto-generated catch block
+				System.out.println(e1.getMessage());
+			}
+
+			System.out.println("Enter batch id");
+			int batchId = sc.nextInt();
+
+			try {
+				boolean res = dao.isBatchIdAvailable(batchId);
+
+				if (res == false) {
+					System.out.println("\nThis batch id doesn't exists!");
+
+					System.out.println("\nTry again...");
+					UserActivity.coursePlanOptions();
+				}
+
+			} catch (CoursePlanException e1) {
+				// TODO Auto-generated catch block
+				System.out.println(e1.getMessage());
+			}
+
+			System.out.println("Enter day number of week between(1-7)");
+			int dayNumber = sc.nextInt();
+
+			if ((dayNumber < 1) || (dayNumber > 7)) {
+
+				System.out.println("\nInvalid entry (choose between 1 to 7)");
+
+				System.out.println("\nTry again...");
+				UserActivity.coursePlanOptions();
+			}
+
+			System.out.println("Enter course plan topic");
+			String topic = sc.next();
+
+			// select status for course plan
+			System.out.println("Choose course plan status\r\n" + "1. Completed\r\n" + "2. Pending");
+			int status = sc.nextInt();
+
+			while (status != 1 || status != 2) {
+
+				System.out.println("\nWrong choice");
+				System.out.println("\nTry again...");
+
+				System.out.println("Choose course plan status\r\n" + "1. Completed\r\n" + "2. Pending");
+				status = sc.nextInt();
+
+				if (status == 1 || status == 2)
+					break;
+			}
+
+			String statusText = null;
+			if (status == 1)
+				statusText = "Completed";
+			else
+				statusText = "Pending";
+
+			coursePlan.setBatchId(batchId);
+			coursePlan.setDayNumber(dayNumber);
+			coursePlan.setTopic(topic);
+			coursePlan.setStatus(statusText);
 
 		} catch (InputMismatchException e) {
 			// TODO Auto-generated catch block
 
-			System.out.println("\nCourse fee is numeric!");
+			System.out.println("\nInvalid data-type");
 
 			System.out.println("\nTry again...");
-			UserActivity.courseOptions();
+			UserActivity.coursePlanOptions();
 		}
-
-		System.out.println("Enter new description");
-		String description = sc.next();
-
-		CourseDao dao = new CourseDaoImp();
-		Course course = new Course();
-
-		course.setCourseName(new_name);
-		course.setFee(fee);
-		course.setCourseDescription(description);
 
 		String result;
 		try {
-			result = dao.upadteCourseByName(old_name, course);
+			result = dao.upadteCoursePlanById(planId, coursePlan);
 			System.out.println("\n" + result);
 
-		} catch (CourseException e) {
+		} catch (CoursePlanException e) {
 			// TODO Auto-generated catch block
 
 			System.out.println(e.getMessage());
 
 			System.out.println();
 			System.out.println("Try again...");
-			UserActivity.courseOptions();
+			UserActivity.coursePlanOptions();
 		}
 
-		UserActivity.courseOptions();
+		UserActivity.coursePlanOptions();
 
 	}
 
-	public static void courseViewAll() {
+	public static void viewAllCoursePlans() {
 
 		try {
 
-			List<Course> courses = new CourseDaoImp().viewAllCourseDetails();
+			List<CoursePlan> coursePlans = new CoursePlanDaoImp().viewAllCoursePlanDetails();
 
-			courses.forEach(c -> {
+			coursePlans.forEach(cp -> {
 
-				System.out.println("Course ID : " + c.getCourseId());
-				System.out.println("Course Name : " + c.getCourseName());
-				System.out.println("Course Address : " + c.getFee());
-				System.out.println("Course Description : " + c.getCourseDescription());
+				System.out.println("Course Plan ID : " + cp.getPlanId());	
+				System.out.println("Course Plan Batch ID : " + cp.getBatchId());
+				System.out.println("Course Plan Day Number : " + cp.getDayNumber());
+				System.out.println("Course Plan Topic : " + cp.getTopic());
+				System.out.println("Course Plan Status : " + cp.getStatus());
 
 				System.out.println("==================================");
 			});
 
-		} catch (CourseException e) {
+		} catch (CoursePlanException e) {
 			System.out.println(e.getMessage());
 
 			System.out.println();
 			System.out.println("Try again...");
-			UserActivity.courseOptions();
+			UserActivity.coursePlanOptions();
 
 		}
 
-		UserActivity.courseOptions();
+		UserActivity.coursePlanOptions();
 
 	}
 
-	public static void courseDeleteByName() {
+	public static void coursePlanDeleteById() {
 
 		try {
 
-			String response = new CourseDaoImp().courseDeleteByName();
+			String response = new CoursePlanDaoImp().coursePlanDeleteById();
 			System.out.println("\n" + response);
 
-		} catch (CourseException e) {
+		} catch (CoursePlanException e) {
 			System.out.println(e.getMessage());
 
 			System.out.println();
 			System.out.println("Try again...");
-			UserActivity.courseOptions();
+			UserActivity.coursePlanOptions();
 
 		}
 
-		UserActivity.courseOptions();
+		UserActivity.coursePlanOptions();
 
 	}
 
