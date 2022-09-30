@@ -7,8 +7,14 @@ import com.cms.exceptions.BatchException;
 
 public interface BatchDao {
 
-	// checking batch name unique or not
-	public boolean isNameUnique(String name) throws BatchException;
+	// checking course id present or not
+	public boolean isCourseIdPresent(int courseId) throws BatchException;
+
+	// checking faculty id present or not
+	public boolean isFacultyIdPresent(int facultyId) throws BatchException;
+
+	// checking batch name previously present or not
+	public boolean isBatchNameUnique(String name) throws BatchException;
 
 	// create batch
 	public String createBatch(Batch batch) throws BatchException;

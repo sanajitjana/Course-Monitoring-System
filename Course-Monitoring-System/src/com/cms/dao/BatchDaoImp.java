@@ -9,12 +9,59 @@ import java.util.List;
 
 import com.cms.bean.Batch;
 import com.cms.exceptions.BatchException;
+import com.cms.exceptions.CourseException;
 import com.cms.utility.DBUtil;
 
 public class BatchDaoImp implements BatchDao {
 
 	@Override
-	public boolean isNameUnique(String name) throws BatchException {
+	public boolean isCourseIdPresent(int courseId) throws BatchException {
+
+		boolean result = false;
+
+		try (Connection conn = DBUtil.provideConnection()) {
+
+			PreparedStatement ps = conn.prepareStatement("select * from course where courseId=?");
+
+			ps.setInt(1, courseId);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				result = true;
+			}
+
+		} catch (SQLException e) {
+			throw new BatchException(e.getMessage());
+		}
+
+		return result;
+	}
+
+	@Override
+	public boolean isFacultyIdPresent(int facultyId) throws BatchException {
+
+		boolean result = false;
+
+		try (Connection conn = DBUtil.provideConnection()) {
+
+			PreparedStatement ps = conn.prepareStatement("select * from faculty where facultyId=?");
+
+			ps.setInt(1, facultyId);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				result = true;
+			}
+
+		} catch (SQLException e) {
+			throw new BatchException(e.getMessage());
+		}
+
+		return result;
+	}
+
+	@Override
+	public boolean isBatchNameUnique(String name) throws BatchException {
 
 		boolean result = false;
 
