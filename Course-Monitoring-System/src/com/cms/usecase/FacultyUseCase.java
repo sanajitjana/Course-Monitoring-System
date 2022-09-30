@@ -7,7 +7,6 @@ import java.util.Scanner;
 import com.cms.bean.Faculty;
 import com.cms.dao.FacultyDao;
 import com.cms.dao.FacultyDaoImp;
-import com.cms.exceptions.AdminException;
 import com.cms.exceptions.FacultyException;
 import com.cms.start.UserActivity;
 

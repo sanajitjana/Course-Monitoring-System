@@ -5,13 +5,9 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.cms.bean.Course;
-import com.cms.bean.Faculty;
 import com.cms.dao.CourseDao;
 import com.cms.dao.CourseDaoImp;
-import com.cms.dao.FacultyDao;
-import com.cms.dao.FacultyDaoImp;
 import com.cms.exceptions.CourseException;
-import com.cms.exceptions.FacultyException;
 import com.cms.start.UserActivity;
 
 public class CourseUseCase {
