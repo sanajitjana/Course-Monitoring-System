@@ -123,7 +123,7 @@ public class BatchDaoImp implements BatchDao {
 		try (Connection conn = DBUtil.provideConnection()) {
 
 			PreparedStatement ps = conn.prepareStatement(
-					"update batch set courseId=?,facultyId=?,numberOfStudents=?,batchStartDate=?,duration=?,batchName=? where courseName=?");
+					"update batch set courseId=?,facultyId=?,numberOfStudents=?,batchStartDate=?,duration=?,batchName=? where batchName=?");
 
 			ps.setInt(1, batch.getCourseId());
 			ps.setInt(2, batch.getFacultyId());
@@ -159,7 +159,8 @@ public class BatchDaoImp implements BatchDao {
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-
+				
+				int bid=rs.getInt("batchId");
 				int cid = rs.getInt("courseId");
 				int fid = rs.getInt("facultyId");
 				int noOfStudents = rs.getInt("numberOfStudents");
@@ -169,6 +170,7 @@ public class BatchDaoImp implements BatchDao {
 
 				Batch batch = new Batch();
 
+				batch.setBatchId(bid);
 				batch.setCourseId(cid);
 				batch.setFacultyId(fid);
 				batch.setNumberOfStudents(noOfStudents);

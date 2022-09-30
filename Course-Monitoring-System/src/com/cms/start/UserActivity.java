@@ -6,6 +6,7 @@ import java.util.Scanner;
 import com.cms.dao.AdminDaoImp;
 import com.cms.exceptions.AdminException;
 import com.cms.usecase.AdminUseCase;
+import com.cms.usecase.BatchUseCase;
 import com.cms.usecase.CoursePlanUseCase;
 import com.cms.usecase.CourseUseCase;
 import com.cms.usecase.FacultyUseCase;
@@ -51,7 +52,7 @@ public class UserActivity {
 	}
 
 	public static void adminOptions() {
-		
+
 		System.out.println("\nChoose an options - ");
 		System.out.println("1. Course (Create,Update,View)\r\n"
 				+ "2. Batch (Create,Update,View) (A batch is related to a course.) \r\n"
@@ -59,7 +60,6 @@ public class UserActivity {
 				+ "5. Course-Plan (Create, Update, and View)\r\n" + "6. View Batch (Day wise)\r\n"
 				+ "7. Report (for every batch)\r\n" + "8. Exit (Admin Logout)");
 
-		
 		System.out.println("\nEnter any number from above");
 
 		Scanner sc = new Scanner(System.in);
@@ -109,14 +109,14 @@ public class UserActivity {
 	}
 
 	public static void courseOptions() {
-		
+
 		System.out.println("\nCreate, Update, View Course.");
-		
+
 		System.out.println("\nChoose an options - \r\n" + "1. Create Course\r\n" + "2. Update Course by Name\r\n"
 				+ "3. View All Courses\r\n" + "4. Delete Course by Name\r\n" + "5. Exit (Get Admin Options)");
 
 		Scanner sc = new Scanner(System.in);
-		
+
 		System.out.println("\nEnter any number from above:");
 
 		int choice = 0;
@@ -160,16 +160,60 @@ public class UserActivity {
 
 	public static void batchOptions() {
 
+		System.out.println(
+				"\nChoose an options - \r\n" + "1. Create Batch \r\n" + "2. Update Batch by Name\r\n"
+						+ "3. View All Batch\r\n" + "4. Delete the Batch\r\n"+ "5. Exit (Get Admin Options)");
+
+		Scanner sc = new Scanner(System.in);
+
 		System.out.println();
-		System.out.println("Create, Update, View Batch. (A batch is related to a course.)");
+		System.out.println("Enter any number from above:");
+
+		int choice = 0;
+		try {
+			choice = sc.nextInt();
+		} catch (InputMismatchException e) {
+
+			System.out.println("Invalid input!");
+
+			System.out.println();
+			System.out.println("Try again...");
+
+			UserActivity.batchOptions();
+		}
+
+		switch (choice) {
+		case 1:
+			BatchUseCase.createBatch();
+			break;
+		case 2:
+			BatchUseCase.batchUpdateByName();
+			break;
+		case 3:
+			BatchUseCase.viewAllBatch();
+			break;
+		case 4:
+			BatchUseCase.batchDeleteByName();
+			break;
+		case 5:
+			UserActivity.adminOptions();
+			break;
+		default:
+			System.out.println("Invalid choice!");
+			System.out.println();
+
+			System.out.println("Try again...");
+			UserActivity.facultyOptions();
+		}
 
 	}
-	
+
 	public static void facultyCanDo() {
-		
-		System.out.println("\nChoose an options - \r\n" + "1. View the Course Plan\r\n" + "2. Fill up the Day-Wise Planner\r\n"
-				+ "3. Update his/her password\r\n" + "4. Exit (Faculty Logout)");
-		
+
+		System.out.println(
+				"\nChoose an options - \r\n" + "1. View the Course Plan\r\n" + "2. Fill up the Day-Wise Planner\r\n"
+						+ "3. Update his/her password\r\n" + "4. Exit (Faculty Logout)");
+
 		Scanner sc = new Scanner(System.in);
 
 		System.out.println();
@@ -208,13 +252,13 @@ public class UserActivity {
 			System.out.println("Try again...");
 			UserActivity.facultyOptions();
 		}
-		
+
 	}
 
 	public static void facultyOptions() {
-		
+
 		System.out.println("\nCreate, Update, View Faculty");
-		
+
 		System.out.println("\nChoose an options - \r\n" + "1. Create Faculty\r\n" + "2. Update Faculty by ID\r\n"
 				+ "3. View All Faculty\r\n" + "4. Delete Faculty by ID\r\n" + "5. Exit (Get Admin Options)");
 
@@ -282,7 +326,7 @@ public class UserActivity {
 
 	}
 
-	public static void reportForBatch() {		
+	public static void reportForBatch() {
 		System.out.println("\nGenerate Report for every batch.");
 	}
 
