@@ -1,5 +1,6 @@
 package com.cms.usecase;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -123,25 +124,37 @@ public class FacultyUseCase {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("\nEnter faculty ID to update - ");
 
-		System.out.println("Enter the faculty id :");
-		int id = sc.nextInt();
+		int id = 0;
+		try {
 
-		System.out.println("Enter new name :");
+			System.out.println("Enter the faculty id");
+			id = sc.nextInt();
+
+		} catch (InputMismatchException e) {
+			// TODO Auto-generated catch block
+
+			System.out.println("Id is numeric!");
+
+			System.out.println("\nTry again...");
+			UserActivity.facultyOptions();
+		}
+
+		System.out.println("Enter new name");
 		String name = sc.next();
 
-		System.out.println("Enter new address:");
+		System.out.println("Enter new address");
 		String address = sc.next();
 
-		System.out.println("Enter new mobile:");
+		System.out.println("Enter new mobile");
 		String mobile = sc.next();
 
-		System.out.println("Enter new email:");
+		System.out.println("Enter new email");
 		String email = sc.next();
 
-		System.out.println("Enter new username:");
+		System.out.println("Enter new username");
 		String username = sc.next();
 
-		System.out.println("Enter new password:");
+		System.out.println("Enter new password");
 		String password = sc.next();
 
 		FacultyDao dao = new FacultyDaoImp();
@@ -209,11 +222,10 @@ public class FacultyUseCase {
 	public static void facultyDeleteById() {
 
 		try {
-			
+
 			String response = new FacultyDaoImp().deleteFacultyById();
-			System.out.println("\n"+response);
-			
-			
+			System.out.println("\n" + response);
+
 		} catch (FacultyException e) {
 			System.out.println(e.getMessage());
 

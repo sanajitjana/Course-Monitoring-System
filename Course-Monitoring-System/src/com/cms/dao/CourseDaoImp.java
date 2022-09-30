@@ -16,6 +16,29 @@ import com.cms.utility.DBUtil;
 public class CourseDaoImp implements CourseDao {
 
 	@Override
+	public boolean isNameUnique(String name) throws CourseException {
+
+		boolean result = false;
+
+		try (Connection conn = DBUtil.provideConnection()) {
+
+			PreparedStatement ps = conn.prepareStatement("select * from course where courseName=?");
+
+			ps.setString(1, name);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				result = true;
+			}
+
+		} catch (SQLException e) {
+			throw new CourseException(e.getMessage());
+		}
+
+		return result;
+	}
+
+	@Override
 	public String createCourse(Course course) throws CourseException {
 		// TODO Auto-generated method stub
 
@@ -118,7 +141,7 @@ public class CourseDaoImp implements CourseDao {
 		}
 
 		if (courses.size() == 0)
-			throw new CourseException("No Course Found!");
+			throw new CourseException("Course Not Found!");
 
 		return courses;
 
@@ -128,7 +151,7 @@ public class CourseDaoImp implements CourseDao {
 	public String courseDeleteByName() throws CourseException {
 		// TODO Auto-generated method stub
 
-		String message = "You doesn't have permission to delete";
+		String message = "You don't have permission to delete";
 
 		return message;
 

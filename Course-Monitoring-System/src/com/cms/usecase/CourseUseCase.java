@@ -1,5 +1,6 @@
 package com.cms.usecase;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -17,20 +18,47 @@ public class CourseUseCase {
 
 	public static void courseCreate() {
 
+		CourseDao dao = new CourseDaoImp();
+		Course course = new Course();
+
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter course details - ");
 
 		System.out.println("Enter course name");
 		String name = sc.next();
 
-		System.out.println("Enter course fee");
-		int fee = sc.nextInt();
+		try {
+			boolean res = dao.isNameUnique(name);
+			
+			if (res) {
+				System.out.println("\nThis course name already exists!");
+
+				System.out.println("\nTry again...");
+				UserActivity.courseOptions();
+			}
+
+		} catch (CourseException e1) {
+			// TODO Auto-generated catch block			
+			System.out.println(e1.getMessage());
+		}
+
+		int fee = 0;
+		try {
+
+			System.out.println("Enter course fee");
+			fee = sc.nextInt();
+
+		} catch (InputMismatchException e) {
+			// TODO Auto-generated catch block
+
+			System.out.println("\nCourse fee is numeric!");
+
+			System.out.println("\nTry again...");
+			UserActivity.courseOptions();
+		}
 
 		System.out.println("Enter course description");
 		String description = sc.next();
-
-		CourseDao dao = new CourseDaoImp();
-		Course course = new Course();
 
 		course.setCourseName(name);
 		course.setFee(fee);
@@ -38,15 +66,14 @@ public class CourseUseCase {
 
 		try {
 			String result = dao.createCourse(course);
-			System.out.println(result);
+			System.out.println("\n" + result);
 
 		} catch (CourseException e) {
 			// TODO Auto-generated catch block
 
-			System.out.println(e.getMessage());
+			System.out.println("\n" + e.getMessage());
 
-			System.out.println();
-			System.out.println("Try again...");
+			System.out.println("\nTry again...");
 			UserActivity.courseOptions();
 
 		}
@@ -60,14 +87,26 @@ public class CourseUseCase {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("\nEnter course name to update - ");
 
-		System.out.println("Enter the course name");
+		System.out.println("Enter old course name");
 		String old_name = sc.next();
 
-		System.out.println("Enter new name");
+		System.out.println("Enter new course name");
 		String new_name = sc.next();
 
-		System.out.println("Enter new fee");
-		int fee = sc.nextInt();
+		int fee = 0;
+		try {
+
+			System.out.println("Enter new fee");
+			fee = sc.nextInt();
+
+		} catch (InputMismatchException e) {
+			// TODO Auto-generated catch block
+
+			System.out.println("\nCourse fee is numeric!");
+
+			System.out.println("\nTry again...");
+			UserActivity.courseOptions();
+		}
 
 		System.out.println("Enter new description");
 		String description = sc.next();
@@ -92,7 +131,6 @@ public class CourseUseCase {
 			System.out.println();
 			System.out.println("Try again...");
 			UserActivity.courseOptions();
-
 		}
 
 		UserActivity.courseOptions();
@@ -108,7 +146,7 @@ public class CourseUseCase {
 			courses.forEach(c -> {
 
 				System.out.println("Course ID : " + c.getCourseId());
-				System.out.println("Course Name :" + c.getCourseName());
+				System.out.println("Course Name : " + c.getCourseName());
 				System.out.println("Course Address : " + c.getFee());
 				System.out.println("Course Description : " + c.getCourseDescription());
 

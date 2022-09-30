@@ -143,7 +143,7 @@ public class UserActivity {
 			CourseUseCase.courseViewAll();
 			break;
 		case 4:
-			CourseUseCase.facultyDeleteByName();
+			CourseUseCase.courseDeleteByName();
 			break;
 		case 5:
 			UserActivity.adminOptions();

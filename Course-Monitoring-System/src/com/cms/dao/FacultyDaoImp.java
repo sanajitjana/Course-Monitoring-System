@@ -99,7 +99,7 @@ public class FacultyDaoImp implements FacultyDao {
 
 		try (Connection conn = DBUtil.provideConnection()) {
 
-			PreparedStatement pss = conn.prepareStatement("select * from faculty where facultyId =?");
+			PreparedStatement pss = conn.prepareStatement("select * from faculty where facultyId=?");
 
 			pss.setInt(1, id);
 
@@ -174,7 +174,7 @@ public class FacultyDaoImp implements FacultyDao {
 		}
 
 		if (faculties.size() == 0)
-			throw new FacultyException("No Faculty Found!");
+			throw new FacultyException("Faculty Not Found!");
 
 		return faculties;
 
@@ -183,7 +183,7 @@ public class FacultyDaoImp implements FacultyDao {
 	@Override
 	public String deleteFacultyById() throws FacultyException {
 
-		String message="You doesn't have permission to delete";
+		String message="You don't have permission to delete";
 
 		return message;
 	}
