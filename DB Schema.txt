@@ -67,9 +67,10 @@ courseDescription text
 
 Batch:
 •	batchId:
+•   batchName:
 •	courseId:
 •	facultyId:
-•	numberofStudents;
+•	numberofStudents
 •	batchstartDate
 •	duration 
 
