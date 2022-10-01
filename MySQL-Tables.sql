@@ -1,12 +1,6 @@
-Tables:
---------------------------------
+create database course_monitoring_db;
 
-
-Admin:
-•	username
-•	password:
-
-
+use course_monitoring_db;
 
 create table admin
 (
@@ -14,22 +8,6 @@ id int PRIMARY KEY AUTO_INCREMENT,
 username varchar(255) NOT NULL UNIQUE,
 password varchar(255) NOT NULL
 );
-
-
-
-
-
-Faculty:
-•	facultyid
-•	facultyName
-•	facultyAddress
-•	mobile
-•	email 
-•	username
-•	password
-
-
-
 
 create table faculty
 (
@@ -42,18 +20,6 @@ username varchar(255) NOT NULL UNIQUE,
 password varchar(255) NOT NULL
 );
 
-
-
-
-
-Course:
-•	courseId
-•	courseName
-•	fee
-•	courseDescription
-
-
-
 create table course
 (
 courseId int PRIMARY KEY AUTO_INCREMENT,
@@ -62,23 +28,10 @@ fee int,
 courseDescription text
 );
 
-
-
-
-Batch:
-•	batchId:
-•   batchName:
-•	courseId:
-•	facultyId:
-•	numberofStudents
-•	batchstartDate
-•	duration 
-
-
-
 create table batch
 (
 batchId int PRIMARY KEY AUTO_INCREMENT,
+batchName varchar(255) UNIQUE NOT NULL,
 courseId int NOT NULL,
 facultyId int NOT NULL,
 numberOfStudents int,
@@ -87,18 +40,6 @@ duration varchar(255),
 foreign key(courseId) references course(courseId) ON DELETE CASCADE,
 foreign key(facultyId) references faculty(facultyId) ON DELETE CASCADE
 );
-
-
-
-CoursPlan:
-•	planId
-•	batchId
-•	dayNumber
-•	topic
-•	status: completed/pending
-
-
-
 
 create table coursPlan
 (
@@ -109,10 +50,3 @@ topic varchar(255),
 status varchar(255),
 foreign key(batchId) references batch(batchId) ON DELETE CASCADE
 );
-
-
-
-
-
-
-
