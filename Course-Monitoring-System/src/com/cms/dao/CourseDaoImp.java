@@ -8,9 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cms.bean.Course;
-import com.cms.bean.Faculty;
 import com.cms.exceptions.CourseException;
-import com.cms.exceptions.FacultyException;
 import com.cms.utility.DBUtil;
 
 public class CourseDaoImp implements CourseDao {
@@ -74,30 +72,18 @@ public class CourseDaoImp implements CourseDao {
 
 		try (Connection conn = DBUtil.provideConnection()) {
 
-			PreparedStatement pss = conn.prepareStatement("select * from course where courseName=?");
+			PreparedStatement ps = conn
+					.prepareStatement("update course set courseName=?,fee=?,courseDescription=? where courseName=?");
 
-			pss.setString(1, old_name);
+			ps.setString(1, course.getCourseName());
+			ps.setInt(2, course.getFee());
+			ps.setString(3, course.getCourseDescription());
+			ps.setString(4, old_name);
 
-			ResultSet rs = pss.executeQuery();
+			int res = ps.executeUpdate();
 
-			if (rs.next()) {
-
-				PreparedStatement ps = conn.prepareStatement(
-						"update course set courseName=?,fee=?,courseDescription=? where courseName=?");
-
-				ps.setString(1, course.getCourseName());
-				ps.setInt(2, course.getFee());
-				ps.setString(3, course.getCourseDescription());
-				ps.setString(4, old_name);
-
-				int res = ps.executeUpdate();
-
-				if (res > 0) {
-					message = "Course update successfully!";
-				}
-
-			} else {
-				message = "Course does not exist with name : " + old_name + "";
+			if (res > 0) {
+				message = "Course update successfully!";
 			}
 
 		} catch (SQLException e) {

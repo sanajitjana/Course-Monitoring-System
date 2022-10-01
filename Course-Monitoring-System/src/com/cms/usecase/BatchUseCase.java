@@ -50,7 +50,7 @@ public class BatchUseCase {
 
 				boolean res = dao.isCourseIdPresent(courseId);
 
-				if (res==false) {
+				if (res == false) {
 					System.out.println("\nThis course Id doesn't exists!");
 
 					System.out.println("\nTry again...");
@@ -70,7 +70,7 @@ public class BatchUseCase {
 
 				boolean res = dao.isFacultyIdPresent(facultyId);
 
-				if (res==false) {
+				if (res == false) {
 					System.out.println("\nThis faculty Id doesn't exists!");
 
 					System.out.println("\nTry again...");
@@ -184,7 +184,7 @@ public class BatchUseCase {
 
 				boolean res = dao.isCourseIdPresent(courseId);
 
-				if (res==false) {
+				if (res == false) {
 					System.out.println("\nThis course Id doesn't exists!");
 
 					System.out.println("\nTry again...");
@@ -204,7 +204,7 @@ public class BatchUseCase {
 
 				boolean res = dao.isFacultyIdPresent(facultyId);
 
-				if (res==false) {
+				if (res == false) {
 					System.out.println("\nThis faculty Id doesn't exists!");
 
 					System.out.println("\nTry again...");
@@ -309,6 +309,10 @@ public class BatchUseCase {
 		}
 
 		UserActivity.batchOptions();
+
+	}
+
+	public static void coursePlanReportForEveryBatch() {
 
 	}
 

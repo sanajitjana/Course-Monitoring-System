@@ -25,7 +25,7 @@ public class CourseUseCase {
 
 		try {
 			boolean res = dao.isNameUnique(name);
-			
+
 			if (res) {
 				System.out.println("\nThis course name already exists!");
 
@@ -34,7 +34,7 @@ public class CourseUseCase {
 			}
 
 		} catch (CourseException e1) {
-			// TODO Auto-generated catch block			
+			// TODO Auto-generated catch block
 			System.out.println(e1.getMessage());
 		}
 
@@ -80,11 +80,29 @@ public class CourseUseCase {
 
 	public static void courseUpdateByName() {
 
+		CourseDao dao = new CourseDaoImp();
+		Course course = new Course();
+
 		Scanner sc = new Scanner(System.in);
 		System.out.println("\nEnter course name to update - ");
 
 		System.out.println("Enter old course name");
 		String old_name = sc.next();
+
+		try {
+			boolean res = dao.isNameUnique(old_name);
+
+			if (res) {
+				System.out.println("\nThis course name already exists!");
+
+				System.out.println("\nTry again...");
+				UserActivity.courseOptions();
+			}
+
+		} catch (CourseException e1) {
+			// TODO Auto-generated catch block
+			System.out.println(e1.getMessage());
+		}
 
 		System.out.println("Enter new course name");
 		String new_name = sc.next();
@@ -98,7 +116,7 @@ public class CourseUseCase {
 		} catch (InputMismatchException e) {
 			// TODO Auto-generated catch block
 
-			System.out.println("\nCourse fee is numeric!");
+			System.out.println("\nFee require numeric value!");
 
 			System.out.println("\nTry again...");
 			UserActivity.courseOptions();
@@ -106,9 +124,6 @@ public class CourseUseCase {
 
 		System.out.println("Enter new description");
 		String description = sc.next();
-
-		CourseDao dao = new CourseDaoImp();
-		Course course = new Course();
 
 		course.setCourseName(new_name);
 		course.setFee(fee);

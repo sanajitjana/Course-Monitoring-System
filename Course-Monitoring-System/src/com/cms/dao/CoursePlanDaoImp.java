@@ -7,9 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cms.bean.Course;
 import com.cms.bean.CoursePlan;
-import com.cms.exceptions.CourseException;
+import com.cms.bean.ReportDayWiseDTO;
 import com.cms.exceptions.CoursePlanException;
 import com.cms.utility.DBUtil;
 
@@ -66,7 +65,6 @@ public class CoursePlanDaoImp implements CoursePlanDao {
 		return message;
 	}
 
-
 	@Override
 	public boolean isPlanIdAvailable(int id) throws CoursePlanException {
 
@@ -97,30 +95,19 @@ public class CoursePlanDaoImp implements CoursePlanDao {
 
 		try (Connection conn = DBUtil.provideConnection()) {
 
-			PreparedStatement pss = conn.prepareStatement("select * from coursePlan where planId=?");
+			PreparedStatement ps = conn
+					.prepareStatement("update coursePlan set batchId=?,dayNumber=?,topic=?,status=? where planId=?");
 
-			pss.setInt(1, id);
+			ps.setInt(1, coursePlan.getBatchId());
+			ps.setInt(2, coursePlan.getDayNumber());
+			ps.setString(3, coursePlan.getTopic());
+			ps.setString(4, coursePlan.getStatus());
+			ps.setInt(5, id);
 
-			ResultSet rs = pss.executeQuery();
+			int res = ps.executeUpdate();
 
-			if (rs.next()) {
-
-				PreparedStatement ps = conn.prepareStatement(
-						"update coursePlan set batchId=?,dayNumber=?,topic=?,status=? where planId=?");
-
-				ps.setInt(1, coursePlan.getBatchId());
-				ps.setInt(2, coursePlan.getDayNumber());
-				ps.setString(3, coursePlan.getTopic());
-				ps.setString(4, coursePlan.getStatus());
-
-				int res = ps.executeUpdate();
-
-				if (res > 0) {
-					message = "Course plan update successfully!";
-				}
-
-			} else {
-				message = "Course plan does not exist with id : " + id + "";
+			if (res > 0) {
+				message = "Course plan update successfully!";
 			}
 
 		} catch (SQLException e) {
@@ -177,6 +164,51 @@ public class CoursePlanDaoImp implements CoursePlanDao {
 		String message = "You don't have permission to delete";
 
 		return message;
+
+	}
+
+	@Override
+	public List<ReportDayWiseDTO> dayWiseCoursePlanForBatch() throws CoursePlanException {
+
+		List<ReportDayWiseDTO> dayWiseDTO = new ArrayList<>();
+
+		try (Connection conn = DBUtil.provideConnection()) {
+
+			PreparedStatement ps = conn.prepareStatement(
+					"select cp.dayNumber,cp.status,c.courseId,c.courseName,b.batchId,b.batchName,f.facultyId,f.facultyName from coursePlan cp INNER JOIN batch b ON cp.batchId=b.batchId INNER JOIN course c ON c.courseId=b.courseId INNER JOIN faculty f ON f.facultyId=b.facultyId group by batchId");
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+
+				int dayNumber = rs.getInt("dayNumber");
+				String status = rs.getString("status");
+
+				int courseId = rs.getInt("courseId");
+				String courseName = rs.getString("courseName");
+
+				int batchId = rs.getInt("batchId");
+				String batchName = rs.getString("batchName");
+
+				int facultyId = rs.getInt("facultyId");
+				String facultyName = rs.getString("facultyName");
+
+				ReportDayWiseDTO dto = new ReportDayWiseDTO(dayNumber, status, courseId, courseName, batchId, batchName,
+						facultyId, facultyName);
+
+				dayWiseDTO.add(dto);
+
+			}
+
+		} catch (SQLException e) {
+			throw new CoursePlanException(e.getMessage());
+		}
+
+		if (dayWiseDTO.isEmpty())
+			throw new CoursePlanException("Empty Course Plan!"
+					+ "\nAllocate Batch to Course Plan...");
+
+		return dayWiseDTO;
 
 	}
 

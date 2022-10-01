@@ -3,6 +3,7 @@ package com.cms.dao;
 import java.util.List;
 
 import com.cms.bean.CoursePlan;
+import com.cms.bean.ReportDayWiseDTO;
 import com.cms.exceptions.CoursePlanException;
 
 public interface CoursePlanDao {
@@ -24,5 +25,8 @@ public interface CoursePlanDao {
 
 	// delete course plan by id
 	public String coursePlanDeleteById() throws CoursePlanException;
+
+	// view course plan day wise for every batch.
+	public List<ReportDayWiseDTO> dayWiseCoursePlanForBatch() throws CoursePlanException;
 
 }

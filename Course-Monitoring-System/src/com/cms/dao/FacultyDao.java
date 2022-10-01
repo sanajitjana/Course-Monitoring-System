@@ -2,7 +2,6 @@ package com.cms.dao;
 
 import java.util.List;
 
-import com.cms.bean.Course;
 import com.cms.bean.Faculty;
 import com.cms.exceptions.FacultyException;
 

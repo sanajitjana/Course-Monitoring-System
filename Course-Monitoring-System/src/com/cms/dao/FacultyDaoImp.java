@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cms.bean.Faculty;
-import com.cms.exceptions.AdminException;
 import com.cms.exceptions.FacultyException;
 import com.cms.start.UserActivity;
 import com.cms.utility.DBUtil;

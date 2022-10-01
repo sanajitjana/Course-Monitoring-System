@@ -12,7 +12,7 @@ public class AdminUseCase {
 
 		Scanner sc = new Scanner(System.in);
 
-		System.out.println("Enter admin details -");
+		System.out.println("\nEnter admin details -");
 		System.out.println("Enter Username: ");
 		String username = sc.next();
 

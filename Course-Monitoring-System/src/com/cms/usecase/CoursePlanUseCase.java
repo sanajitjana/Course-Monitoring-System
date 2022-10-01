@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.cms.bean.CoursePlan;
+import com.cms.bean.ReportDayWiseDTO;
 import com.cms.dao.CoursePlanDao;
 import com.cms.dao.CoursePlanDaoImp;
 import com.cms.exceptions.CoursePlanException;
@@ -40,7 +41,7 @@ public class CoursePlanUseCase {
 				System.out.println(e1.getMessage());
 			}
 
-			System.out.println("Enter day number of week between(1-7)");
+			System.out.println("Enter day number of week between(1(Monday) to 7(Sunday))");
 			int dayNumber = sc.nextInt();
 
 			if ((dayNumber < 1) || (dayNumber > 7)) {
@@ -55,26 +56,26 @@ public class CoursePlanUseCase {
 			String topic = sc.next();
 
 			// select status for course plan
-			System.out.println("Choose course plan status\r\n" + "1. Completed\r\n" + "2. Pending");
-			int status = sc.nextInt();
-
-			while (status != 1 || status != 2) {
-
-				System.out.println("\nWrong choice");
-				System.out.println("\nTry again...");
+			int status = 0;
+			while (true) {
 
 				System.out.println("Choose course plan status\r\n" + "1. Completed\r\n" + "2. Pending");
 				status = sc.nextInt();
 
-				if (status == 1 || status == 2)
+				if (status == 1 || status == 2) {
 					break;
+
+				} else {
+					System.out.println("\nWrong choice");
+					System.out.println("\nTry again...");
+				}
 			}
 
 			String statusText = null;
 			if (status == 1)
-				statusText = "completed";
+				statusText = "Completed";
 			else
-				statusText = "pending";
+				statusText = "Pending";
 
 			coursePlan.setBatchId(batchId);
 			coursePlan.setDayNumber(dayNumber);
@@ -116,7 +117,7 @@ public class CoursePlanUseCase {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("\nEnter course plan id to update - ");
 
-		int planId=0;
+		int planId = 0;
 		try {
 
 			System.out.println("Enter course-plan id");
@@ -155,7 +156,7 @@ public class CoursePlanUseCase {
 				System.out.println(e1.getMessage());
 			}
 
-			System.out.println("Enter day number of week between(1-7)");
+			System.out.println("Enter day number of week between(1(Monday) to 7(Sunday))");
 			int dayNumber = sc.nextInt();
 
 			if ((dayNumber < 1) || (dayNumber > 7)) {
@@ -170,25 +171,26 @@ public class CoursePlanUseCase {
 			String topic = sc.next();
 
 			// select status for course plan
-			System.out.println("Choose course plan status\r\n" + "1. Completed\r\n" + "2. Pending");
-			int status = sc.nextInt();
+			int status = 0;
 
-			while (status != 1 || status != 2) {
+			while (true) {
 
-				System.out.println("\nWrong choice");
-				System.out.println("\nTry again...");
-
-				System.out.println("Choose course plan status\r\n" + "1. Completed\r\n" + "2. Pending");
+				System.out.println("\nChoose course plan status\r\n" + "1. Completed\r\n" + "2. Pending");
 				status = sc.nextInt();
 
-				if (status == 1 || status == 2)
+				if (status == 1 || status == 2) {
 					break;
+				} else {
+					System.out.println("\nWrong choice");
+					System.out.println("\nTry again...");
+				}
+
 			}
 
-			String statusText = null;
+			String statusText = "Pending";
 			if (status == 1)
 				statusText = "Completed";
-			else
+			else if (status == 2)
 				statusText = "Pending";
 
 			coursePlan.setBatchId(batchId);
@@ -232,9 +234,21 @@ public class CoursePlanUseCase {
 
 			coursePlans.forEach(cp -> {
 
-				System.out.println("Course Plan ID : " + cp.getPlanId());	
+				System.out.println("Course Plan ID : " + cp.getPlanId());
 				System.out.println("Course Plan Batch ID : " + cp.getBatchId());
-				System.out.println("Course Plan Day Number : " + cp.getDayNumber());
+
+				int day = cp.getDayNumber();
+
+				switch (day) {
+				case 1 -> System.out.println("Course Plan Day Number : " + day + "(Monday)");
+				case 2 -> System.out.println("Course Plan Day Number : " + day + "(TuesDay)");
+				case 3 -> System.out.println("Course Plan Day Number : " + day + "(Wednesday)");
+				case 4 -> System.out.println("Course Plan Day Number : " + day + "(Thursday)");
+				case 5 -> System.out.println("Course Plan Day Number : " + day + "(Friday)");
+				case 6 -> System.out.println("Course Plan Day Number : " + day + "(Satarday)");
+				case 7 -> System.out.println("Course Plan Day Number : " + day + "(Sunday)");
+				}
+
 				System.out.println("Course Plan Topic : " + cp.getTopic());
 				System.out.println("Course Plan Status : " + cp.getStatus());
 
@@ -249,7 +263,6 @@ public class CoursePlanUseCase {
 			UserActivity.coursePlanOptions();
 
 		}
-
 		UserActivity.coursePlanOptions();
 
 	}
@@ -271,6 +284,51 @@ public class CoursePlanUseCase {
 		}
 
 		UserActivity.coursePlanOptions();
+
+	}
+
+	public static void dayWiseCoursePlanUpdateForEveryBatch() {
+
+		try {
+
+			List<ReportDayWiseDTO> res = new CoursePlanDaoImp().dayWiseCoursePlanForBatch();
+
+			System.out.println("\nDay wise course plan update of every batch");
+			System.out.println("--------------------------------------------\n");
+			
+			
+			res.forEach(dto -> {
+
+				int day = dto.getDayNumber();
+
+				switch (day) {
+				case 1 -> System.out.println("Day Number : " + day + "(Monday)");
+				case 2 -> System.out.println("Day Number : " + day + "(TuesDay)");
+				case 3 -> System.out.println("Day Number : " + day + "(Wednesday)");
+				case 4 -> System.out.println("Day Number : " + day + "(Thursday)");
+				case 5 -> System.out.println("Day Number : " + day + "(Friday)");
+				case 6 -> System.out.println("Day Number : " + day + "(Satarday)");
+				case 7 -> System.out.println("Day Number : " + day + "(Sunday)");
+				}
+
+				System.out.println("Class Status : " + dto.getStatus());
+				System.out.println("Batch Name : " + dto.getBatchName() + "(" + dto.getBatchId() + ")");
+				System.out.println("Course Name : " + dto.getCourseName() + "(" + dto.getCourseId() + ")");
+				System.out.println("Faculty Name : " + dto.getFacultyName() + "(" + dto.getFacultyId() + ")");
+
+				System.out.println("============================\n");
+			});
+
+		} catch (CoursePlanException e) {
+			System.out.println(e.getMessage());
+
+			System.out.println();
+			System.out.println("Try again...");
+			UserActivity.adminOptions();
+
+		}
+
+		UserActivity.adminOptions();
 
 	}
 

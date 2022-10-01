@@ -9,7 +9,6 @@ import java.util.List;
 
 import com.cms.bean.Batch;
 import com.cms.exceptions.BatchException;
-import com.cms.exceptions.CourseException;
 import com.cms.utility.DBUtil;
 
 public class BatchDaoImp implements BatchDao {

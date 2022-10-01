@@ -3,24 +3,25 @@ package com.cms.start;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import com.cms.dao.AdminDaoImp;
-import com.cms.exceptions.AdminException;
 import com.cms.usecase.AdminUseCase;
 import com.cms.usecase.BatchUseCase;
 import com.cms.usecase.CoursePlanUseCase;
 import com.cms.usecase.CourseUseCase;
 import com.cms.usecase.FacultyUseCase;
 
-public class UserActivity {
-
+public class UserActivity {	
+	
+	@SuppressWarnings("resource")
 	public static void selectUser() {
 
+		
 		Scanner sc = new Scanner(System.in);
 
 		System.out.println();
-		System.out.println("Choose an options - \n" + "1. Admin Login\n" + "2. Faculty Login\n");
+		System.out
+				.println("Choose an options - \n" + "1. Admin Login\n" + "2. Faculty Login\n" + "3. Exit ");
 
-		System.out.println("Enter any number from above: ");
+		System.out.println("\nEnter any number from above: ");
 
 		int choice = 0;
 		try {
@@ -42,6 +43,9 @@ public class UserActivity {
 		case 2:
 			FacultyUseCase.facultyLogin();
 			break;
+		case 3:
+			System.out.println("Thank you!");
+			break;
 		default:
 			System.out.println("Invalid choice!");
 			System.out.println();
@@ -51,14 +55,14 @@ public class UserActivity {
 		}
 	}
 
+	@SuppressWarnings("resource")
 	public static void adminOptions() {
 
 		System.out.println("\nChoose an options - ");
-		System.out.println("1. Course (Create,Update,View)\r\n"
-				+ "2. Batch (Create,Update,View) (A batch is related to a course.) \r\n"
-				+ "3. Faculty (Create,Update,View)\r\n" + "4. Allocate faculty to a batch.\r\n"
-				+ "5. Course-Plan (Create, Update, and View)\r\n" + "6. View Batch (Day wise)\r\n"
-				+ "7. Report (for every batch)\r\n" + "8. Exit (Admin Logout)");
+		System.out.println("1. Course (Create,Update,View)\r\n" + "2. Batch (Create,Update,View)\r\n"
+				+ "3. Faculty (Create,Update,View)\r\n" + "4. Course-Plan (Create, Update, and View)\r\n"
+				+ "5. Course Plan for Every Batch (Day wise)\r\n" + "6. Report (for every batch)\r\n"
+				+ "7. Exit (Admin Logout)");
 
 		System.out.println("\nEnter any number from above");
 
@@ -79,22 +83,18 @@ public class UserActivity {
 			break;
 		}
 		case 4: {
-			UserActivity.allocateFacultyToBatch();
-			break;
-		}
-		case 5: {
 			UserActivity.coursePlanOptions();
 			break;
 		}
-		case 6: {
+		case 5: {
 			UserActivity.dayWiseUpdateBatch();
 			break;
 		}
-		case 7: {
+		case 6: {
 			UserActivity.reportForBatch();
 			break;
 		}
-		case 8: {
+		case 7: {
 			AdminUseCase.adminLogout();
 			break;
 		}
@@ -108,6 +108,7 @@ public class UserActivity {
 
 	}
 
+	@SuppressWarnings("resource")
 	public static void courseOptions() {
 
 		System.out.println("\nCreate, Update, View Course");
@@ -159,6 +160,7 @@ public class UserActivity {
 
 	}
 
+	@SuppressWarnings("resource")
 	public static void batchOptions() {
 
 		System.out.println("\nCreate, Update and View Batch");
@@ -211,6 +213,7 @@ public class UserActivity {
 
 	}
 
+	@SuppressWarnings("resource")
 	public static void facultyCanDo() {
 
 		System.out.println(
@@ -258,9 +261,10 @@ public class UserActivity {
 
 	}
 
+	@SuppressWarnings("resource")
 	public static void facultyOptions() {
 
-		System.out.println("\nCreate, Update, View Faculty");		
+		System.out.println("\nCreate, Update, View Faculty");
 		System.out.println("----------------------------------");
 
 		System.out.println("\nChoose an options - \r\n" + "1. Create Faculty\r\n" + "2. Update Faculty by ID\r\n"
@@ -309,13 +313,7 @@ public class UserActivity {
 		}
 	}
 
-	public static void allocateFacultyToBatch() {
-
-		System.out.println();
-		System.out.println("Allocate faculty to a batch.");
-
-	}
-
+	@SuppressWarnings("resource")
 	public static void coursePlanOptions() {
 
 		System.out.println("\nCreate, Update, View Course Plan");
@@ -371,13 +369,12 @@ public class UserActivity {
 
 	public static void dayWiseUpdateBatch() {
 
-		System.out.println();
-		System.out.println("View the Day wise update of every batch.");
-
+		CoursePlanUseCase.dayWiseCoursePlanUpdateForEveryBatch();
 	}
 
 	public static void reportForBatch() {
-		System.out.println("\nGenerate Report for every batch.");
+
+		BatchUseCase.coursePlanReportForEveryBatch();
 	}
 
 }
