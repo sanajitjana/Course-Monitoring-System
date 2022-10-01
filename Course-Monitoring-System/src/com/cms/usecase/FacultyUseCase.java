@@ -4,9 +4,12 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import com.cms.bean.CoursePlan;
 import com.cms.bean.Faculty;
+import com.cms.dao.CoursePlanDaoImp;
 import com.cms.dao.FacultyDao;
 import com.cms.dao.FacultyDaoImp;
+import com.cms.exceptions.CoursePlanException;
 import com.cms.exceptions.FacultyException;
 import com.cms.start.UserActivity;
 
@@ -26,17 +29,13 @@ public class FacultyUseCase {
 		try {
 			new FacultyDaoImp().loginFaculty(username, password);
 
-			System.out.println();
-			System.out.println("Welcome! Login Successful...");
-
-			System.out.println();
+			System.out.println("\nWelcome! Login Successful...");
 			UserActivity.facultyCanDo();
 
 		} catch (FacultyException e) {
-			System.out.println(e.getMessage());
 
-			System.out.println();
-			System.out.println("Try again...");
+			System.out.println(e.getMessage());
+			System.out.println("\nTry again...");
 			UserActivity.selectUser();
 		}
 
@@ -58,9 +57,8 @@ public class FacultyUseCase {
 
 		} else {
 
-			System.out.println();
-			System.out.println("Try again...");
-			System.out.println();
+			System.out.println("\nInvalid choice");
+			System.out.println("\nTry again...");
 
 			UserActivity.facultyCanDo();
 		}
@@ -195,7 +193,7 @@ public class FacultyUseCase {
 			faculties.forEach(f -> {
 
 				System.out.println("Faculty ID : " + f.getFacultyId());
-				System.out.println("Faculty Name :" + f.getFacultyName());
+				System.out.println("Faculty Name : " + f.getFacultyName());
 				System.out.println("Faculty Address : " + f.getFacultyAddress());
 				System.out.println("Faculty Mobile : " + f.getMobile());
 				System.out.println("Faculty Email : " + f.getEmail());
@@ -237,17 +235,163 @@ public class FacultyUseCase {
 		UserActivity.facultyOptions();
 
 	}
-	
+
 	public static void viewCoursePlan() {
-		System.out.println("\nView the Course Plan");
+
+		try {
+			List<CoursePlan> coursePlans = new CoursePlanDaoImp().viewAllCoursePlanDetails();
+
+			coursePlans.forEach(cp -> {
+
+				System.out.println("Course Plan ID : " + cp.getPlanId());
+				System.out.println("Course Plan Batch ID : " + cp.getBatchId());
+
+				int day = cp.getDayNumber();
+
+				switch (day) {
+				case 1 -> System.out.println("Course Plan Day Number : " + day + "(Monday)");
+				case 2 -> System.out.println("Course Plan Day Number : " + day + "(TuesDay)");
+				case 3 -> System.out.println("Course Plan Day Number : " + day + "(Wednesday)");
+				case 4 -> System.out.println("Course Plan Day Number : " + day + "(Thursday)");
+				case 5 -> System.out.println("Course Plan Day Number : " + day + "(Friday)");
+				case 6 -> System.out.println("Course Plan Day Number : " + day + "(Satarday)");
+				case 7 -> System.out.println("Course Plan Day Number : " + day + "(Sunday)");
+				}
+
+				System.out.println("Course Plan Topic : " + cp.getTopic());
+				System.out.println("Course Plan Status : " + cp.getStatus());
+
+				System.out.println("==================================");
+			});
+
+		} catch (CoursePlanException e) {
+
+			System.out.println("\n" + e.getMessage());
+			System.out.println("\nTry again...");
+			UserActivity.facultyCanDo();
+		}
+		UserActivity.facultyCanDo();
 	}
 
 	public static void fillUpDayWisePlanner() {
-		System.out.println("\nFill up day wise planner");
+
+		Scanner sc = new Scanner(System.in);
+		System.out.println("\nPending Courses Id");
+
+		try {
+			List<CoursePlan> coursePlans = new CoursePlanDaoImp().pendingCoursePlan();
+
+			coursePlans.forEach(pendingCP -> {
+				System.out.print(pendingCP.getPlanId() + ", ");
+			});
+
+		} catch (CoursePlanException e) {
+
+			System.out.println("\n" + e.getMessage());
+			System.out.println("\nTry again...");
+			UserActivity.facultyCanDo();
+		}
+
+		int id = 0;
+		try {
+
+			try {
+
+				System.out.println("\n\nEnter a course id to fill-up");
+				id = sc.nextInt();
+
+				Boolean result = new CoursePlanDaoImp().isIdAvaillableAndStatusPending(id);
+
+				if (result == false) {
+					System.out.println(
+							"\nId doesn't exists Or the course is completed" + "\nTips - Select from above list");
+
+					System.out.println("\nTry again... ");
+					UserActivity.facultyCanDo();
+				}
+
+			} catch (CoursePlanException e) {
+
+				System.out.println(e.getMessage());
+
+				System.out.println("\nTry again...");
+				UserActivity.facultyCanDo();
+			}
+
+		} catch (InputMismatchException e) {
+
+			System.out.println("\n" + e.getMessage());
+			System.out.println("\nTry again...");
+			UserActivity.facultyCanDo();
+		}
+
+		try {
+			String result = new CoursePlanDaoImp().updateCoursePlanStatus(id);
+			System.out.println("\n" + result);
+
+		} catch (CoursePlanException e) {
+			// TODO Auto-generated catch block
+
+			System.out.println(e.getMessage());
+
+			System.out.println("\nTry again...");
+			UserActivity.facultyOptions();
+		}
+		UserActivity.facultyCanDo();
+
 	}
 
 	public static void updateFacultyPassword() {
-		System.out.println("\nUpdate faculty password");
+
+		Scanner sc = new Scanner(System.in);
+
+		try {
+
+			System.out.println("Enter your username");
+			String username = sc.next();
+
+			System.out.println("Enter your old password");
+			String old_password = sc.next();
+
+			Boolean result = new FacultyDaoImp().checkUsernamePassword(username, old_password);
+
+			if (result == false) {
+				System.out.println("\nInvalid Username Or Password");
+
+				System.out.println("\nTry again... ");
+				UserActivity.facultyCanDo();
+			}
+
+			System.out.println("Enter your new password");
+			String new_password = sc.next();
+			
+			System.out.println("Re-enter your new password");
+			String re_enter_new_password = sc.next();
+
+			try {
+				String res = new FacultyDaoImp().updateFacultyPassword(username, new_password);
+				System.out.println("\n" + res);
+
+			} catch (FacultyException e) {
+				// TODO Auto-generated catch block
+
+				System.out.println(e.getMessage());
+
+				System.out.println("\nTry again...");
+				UserActivity.facultyCanDo();
+			}
+
+			UserActivity.facultyCanDo();
+
+		} catch (FacultyException e) {
+
+			System.out.println(e.getMessage());
+
+			System.out.println("\nTry again...");
+			UserActivity.facultyCanDo();
+		}
+		UserActivity.facultyCanDo();
+
 	}
 
 }

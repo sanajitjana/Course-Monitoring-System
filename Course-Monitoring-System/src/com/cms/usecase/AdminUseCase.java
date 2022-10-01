@@ -21,20 +21,16 @@ public class AdminUseCase {
 		
 		
 		try {
-			new AdminDaoImp().loginAdmin(username, password);
+			new AdminDaoImp().loginAdmin(username, password);			
 			
-			System.out.println();
-			System.out.println("Welcome! Login Successful...");
-			
-			System.out.println();
+			System.out.println("\nWelcome! Login Successful...");
 			UserActivity.adminOptions();
 			
 
 		} catch (AdminException e) {
-			System.out.println(e.getMessage());
+			System.out.println(e.getMessage());			
 			
-			System.out.println();
-			System.out.println("Try again...");
+			System.out.println("\nTry again...");
 			UserActivity.selectUser();
 		}
 
@@ -56,8 +52,7 @@ public class AdminUseCase {
 			
 		}else {
 			
-			System.out.println();
-			System.out.println("Try again...");
+			System.out.println("\nTry again...");
 			System.out.println();
 			
 			UserActivity.adminOptions();

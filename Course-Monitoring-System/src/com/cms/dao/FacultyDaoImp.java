@@ -156,7 +156,7 @@ public class FacultyDaoImp implements FacultyDao {
 				String password = "********";
 
 				Faculty faculty = new Faculty();
-				
+
 				faculty.setFacultyId(id);
 				faculty.setFacultyName(name);
 				faculty.setFacultyAddress(address);
@@ -182,9 +182,60 @@ public class FacultyDaoImp implements FacultyDao {
 	@Override
 	public String deleteFacultyById() throws FacultyException {
 
-		String message="You don't have permission to delete";
+		String message = "You don't have permission to delete";
 
 		return message;
+	}
+
+	@Override
+	public boolean checkUsernamePassword(String username, String old_password) throws FacultyException {
+
+		boolean result = false;
+
+		try (Connection conn = DBUtil.provideConnection()) {
+
+			PreparedStatement ps = conn.prepareStatement("select * from faculty where username=? AND password=?");
+
+			ps.setString(1, username);
+			ps.setString(2, old_password);
+
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				result = true;
+			}
+
+		} catch (SQLException e) {
+			throw new FacultyException(e.getMessage());
+		}
+
+		return result;
+	}
+
+	@Override
+	public String updateFacultyPassword(String username, String new_password) throws FacultyException {
+
+		String result = "Failed!";
+
+		try (Connection conn = DBUtil.provideConnection()) {
+
+			PreparedStatement ps = conn.prepareStatement("update faculty set password=? where username=?");
+
+			ps.setString(1, new_password);
+			ps.setString(2, username);
+
+			int rs = ps.executeUpdate();
+
+			if (rs > 0) {
+				result = "Password update successfully!";
+			}
+
+		} catch (SQLException e) {
+			throw new FacultyException(e.getMessage());
+		}
+
+		return result;
+
 	}
 
 }

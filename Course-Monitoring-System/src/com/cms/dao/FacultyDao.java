@@ -25,4 +25,10 @@ public interface FacultyDao {
 	// delete faculty by id
 	public String deleteFacultyById() throws FacultyException;
 
+	// before update password check is it valid or not
+	public boolean checkUsernamePassword(String username, String old_password) throws FacultyException;
+
+	// update faculty password
+	public String updateFacultyPassword(String username, String new_password) throws FacultyException;
+
 }

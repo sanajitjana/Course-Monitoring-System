@@ -15,11 +15,9 @@ public class UserActivity {
 	public static void selectUser() {
 
 		
-		Scanner sc = new Scanner(System.in);
-
-		System.out.println();
+		Scanner sc = new Scanner(System.in);		
 		System.out
-				.println("Choose an options - \n" + "1. Admin Login\n" + "2. Faculty Login\n" + "3. Exit ");
+				.println("\nChoose an options - \n" + "1. Admin Login\n" + "2. Faculty Login\n" + "3. Exit ");
 
 		System.out.println("\nEnter any number from above: ");
 
@@ -217,23 +215,20 @@ public class UserActivity {
 	public static void facultyCanDo() {
 
 		System.out.println(
-				"\nChoose an options - \r\n" + "1. View the Course Plan\r\n" + "2. Fill up the Day-Wise Planner\r\n"
-						+ "3. Update his/her password\r\n" + "4. Exit (Faculty Logout)");
+				"\nChoose an options - \r\n" + "1. View the Course Plan\r\n" + "2. Fill up the Course Planner\r\n"
+						+ "3. Update your password\r\n" + "4. Exit (Faculty Logout)");
 
 		Scanner sc = new Scanner(System.in);
-
-		System.out.println();
-		System.out.println("Enter any number from above:");
+		
+		System.out.println("\nEnter any number from above:");
 
 		int choice = 0;
 		try {
 			choice = sc.nextInt();
 		} catch (InputMismatchException e) {
 
-			System.out.println("Invalid input!");
-
-			System.out.println();
-			System.out.println("Try again...");
+			System.out.println("\nInvalid input!");
+			System.out.println("\nTry again...");
 
 			UserActivity.facultyCanDo();
 		}

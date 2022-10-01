@@ -4,10 +4,13 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import com.cms.bean.Batch;
 import com.cms.bean.CoursePlan;
 import com.cms.bean.ReportDayWiseDTO;
+import com.cms.dao.BatchDaoImp;
 import com.cms.dao.CoursePlanDao;
 import com.cms.dao.CoursePlanDaoImp;
+import com.cms.exceptions.BatchException;
 import com.cms.exceptions.CoursePlanException;
 import com.cms.start.UserActivity;
 
@@ -19,18 +22,36 @@ public class CoursePlanUseCase {
 		CoursePlan coursePlan = new CoursePlan();
 
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter course plan details - ");
+		System.out.println("Enter require course plan details - ");
+
+		System.out.print("\nAvailable Batches\n");
+
+		try {
+			List<Batch> batches = new BatchDaoImp().availableBatch();
+
+			batches.forEach(b -> {
+				System.out.print(b.getBatchId() + "(" + b.getBatchName() + ")");
+			});
+
+		} catch (BatchException e) {
+
+			System.out.println(e.getMessage());
+
+			System.out.println();
+			System.out.println("Try again...");
+			UserActivity.coursePlanOptions();
+		}
 
 		try {
 
-			System.out.println("Enter batch id");
+			System.out.println("\n\nEnter batch id");
 			int batchId = sc.nextInt();
 
 			try {
 				boolean res = dao.isBatchIdAvailable(batchId);
 
 				if (res == false) {
-					System.out.println("\nThis batch id doesn't exists!");
+					System.out.println("\nThis batch id doesn't exists!" + "\nPlease select from above");
 
 					System.out.println("\nTry again...");
 					UserActivity.coursePlanOptions();
@@ -41,7 +62,7 @@ public class CoursePlanUseCase {
 				System.out.println(e1.getMessage());
 			}
 
-			System.out.println("Enter day number of week between(1(Monday) to 7(Sunday))");
+			System.out.println("Enter day number of week between(1 for Monday) to (7 for Sunday))");
 			int dayNumber = sc.nextInt();
 
 			if ((dayNumber < 1) || (dayNumber > 7)) {
@@ -56,31 +77,12 @@ public class CoursePlanUseCase {
 			String topic = sc.next();
 
 			// select status for course plan
-			int status = 0;
-			while (true) {
-
-				System.out.println("Choose course plan status\r\n" + "1. Completed\r\n" + "2. Pending");
-				status = sc.nextInt();
-
-				if (status == 1 || status == 2) {
-					break;
-
-				} else {
-					System.out.println("\nWrong choice");
-					System.out.println("\nTry again...");
-				}
-			}
-
-			String statusText = null;
-			if (status == 1)
-				statusText = "Completed";
-			else
-				statusText = "Pending";
+			String status = "Pending";
 
 			coursePlan.setBatchId(batchId);
 			coursePlan.setDayNumber(dayNumber);
 			coursePlan.setTopic(topic);
-			coursePlan.setStatus(statusText);
+			coursePlan.setStatus(status);
 
 		} catch (InputMismatchException e) {
 			// TODO Auto-generated catch block
@@ -156,7 +158,7 @@ public class CoursePlanUseCase {
 				System.out.println(e1.getMessage());
 			}
 
-			System.out.println("Enter day number of week between(1(Monday) to 7(Sunday))");
+			System.out.println("Enter day number of week between(1 for Monday) to (7 for Sunday))");
 			int dayNumber = sc.nextInt();
 
 			if ((dayNumber < 1) || (dayNumber > 7)) {
@@ -170,33 +172,12 @@ public class CoursePlanUseCase {
 			System.out.println("Enter course plan topic");
 			String topic = sc.next();
 
-			// select status for course plan
-			int status = 0;
-
-			while (true) {
-
-				System.out.println("\nChoose course plan status\r\n" + "1. Completed\r\n" + "2. Pending");
-				status = sc.nextInt();
-
-				if (status == 1 || status == 2) {
-					break;
-				} else {
-					System.out.println("\nWrong choice");
-					System.out.println("\nTry again...");
-				}
-
-			}
-
-			String statusText = "Pending";
-			if (status == 1)
-				statusText = "Completed";
-			else if (status == 2)
-				statusText = "Pending";
+			String status = "Pending";
 
 			coursePlan.setBatchId(batchId);
 			coursePlan.setDayNumber(dayNumber);
 			coursePlan.setTopic(topic);
-			coursePlan.setStatus(statusText);
+			coursePlan.setStatus(status);
 
 		} catch (InputMismatchException e) {
 			// TODO Auto-generated catch block
@@ -295,8 +276,7 @@ public class CoursePlanUseCase {
 
 			System.out.println("\nDay wise course plan update of every batch");
 			System.out.println("--------------------------------------------\n");
-			
-			
+
 			res.forEach(dto -> {
 
 				int day = dto.getDayNumber();
@@ -311,9 +291,9 @@ public class CoursePlanUseCase {
 				case 7 -> System.out.println("Day Number : " + day + "(Sunday)");
 				}
 
-				System.out.println("Class Status : " + dto.getStatus());
-				System.out.println("Batch Name : " + dto.getBatchName() + "(" + dto.getBatchId() + ")");
 				System.out.println("Course Name : " + dto.getCourseName() + "(" + dto.getCourseId() + ")");
+				System.out.println("Course Status : " + dto.getStatus());
+				System.out.println("Batch Name : " + dto.getBatchName() + "(" + dto.getBatchId() + ")");
 				System.out.println("Faculty Name : " + dto.getFacultyName() + "(" + dto.getFacultyId() + ")");
 
 				System.out.println("============================\n");

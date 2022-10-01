@@ -13,6 +13,9 @@ public interface CourseDao {
 	// create course
 	public String createCourse(Course course) throws CourseException;
 
+	// before update checking course name available or not
+	public boolean isCourseNameAvailable(String name) throws CourseException;
+
 	// update course by name
 	public String upadteCourseByName(String old_name, Course course) throws CourseException;
 

@@ -122,7 +122,6 @@ public class CoursePlanDaoImp implements CoursePlanDao {
 	public List<CoursePlan> viewAllCoursePlanDetails() throws CoursePlanException {
 
 		List<CoursePlan> coursePlans = new ArrayList<CoursePlan>();
-		CoursePlan coursePlan = new CoursePlan();
 
 		try (Connection conn = DBUtil.provideConnection()) {
 
@@ -130,6 +129,8 @@ public class CoursePlanDaoImp implements CoursePlanDao {
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
+
+				CoursePlan coursePlan = new CoursePlan();
 
 				int planId = rs.getInt("planId");
 				int batchId = rs.getInt("batchId");
@@ -205,11 +206,87 @@ public class CoursePlanDaoImp implements CoursePlanDao {
 		}
 
 		if (dayWiseDTO.isEmpty())
-			throw new CoursePlanException("Empty Course Plan!"
-					+ "\nAllocate Batch to Course Plan...");
+			throw new CoursePlanException("Empty Course Plan!" + "\nAllocate Batch to Course Plan...");
 
 		return dayWiseDTO;
 
+	}
+
+	@Override
+	public List<CoursePlan> pendingCoursePlan() throws CoursePlanException {
+
+		List<CoursePlan> coursePlans = new ArrayList<CoursePlan>();
+
+		try (Connection conn = DBUtil.provideConnection()) {
+
+			PreparedStatement ps = conn.prepareStatement("select * from coursePlan where status='Pending'");
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+
+				int planId = rs.getInt("planId");
+
+				CoursePlan cp = new CoursePlan();
+				cp.setPlanId(planId);
+
+				coursePlans.add(cp);
+			}
+
+		} catch (SQLException e) {
+			throw new CoursePlanException(e.getMessage());
+		}
+
+		if (coursePlans.size() == 0)
+			throw new CoursePlanException("Empty!");
+
+		return coursePlans;
+	}
+
+	@Override
+	public String updateCoursePlanStatus(int id) throws CoursePlanException {
+
+		String message = "Failed!";
+
+		try (Connection conn = DBUtil.provideConnection()) {
+
+			PreparedStatement ps = conn.prepareStatement("update coursePlan set status='Completed' where planId=?");
+
+			ps.setInt(1, id);
+			int res = ps.executeUpdate();
+
+			if (res > 0) {
+				message = "Course plan fill-up successfully!";
+			}
+
+		} catch (SQLException e) {
+			throw new CoursePlanException(e.getMessage());
+		}
+
+		return message;
+	}
+
+	@Override
+	public boolean isIdAvaillableAndStatusPending(int id) throws CoursePlanException {
+		// TODO Auto-generated method stub
+
+		boolean result = false;
+
+		try (Connection conn = DBUtil.provideConnection()) {
+
+			PreparedStatement ps = conn.prepareStatement("select * from coursePlan where planId=? AND status='Pending'");
+
+			ps.setInt(1, id);
+			ResultSet res = ps.executeQuery();
+
+			if (res.next()) {
+				result=true;
+			}
+
+		} catch (SQLException e) {
+			throw new CoursePlanException(e.getMessage());
+		}
+
+		return result;
 	}
 
 }

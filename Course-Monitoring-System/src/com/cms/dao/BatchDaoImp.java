@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cms.bean.Batch;
+import com.cms.bean.ReportForBatchDTO;
 import com.cms.exceptions.BatchException;
 import com.cms.utility.DBUtil;
 
@@ -158,8 +159,8 @@ public class BatchDaoImp implements BatchDao {
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				
-				int bid=rs.getInt("batchId");
+
+				int bid = rs.getInt("batchId");
 				int cid = rs.getInt("courseId");
 				int fid = rs.getInt("facultyId");
 				int noOfStudents = rs.getInt("numberOfStudents");
@@ -196,9 +197,85 @@ public class BatchDaoImp implements BatchDao {
 		// TODO Auto-generated method stub
 
 		String message = "You don't have permission to delete";
-
 		return message;
 
+	}
+
+	@Override
+	public List<ReportForBatchDTO> coursePlanReportForBatch() throws BatchException {
+
+		List<ReportForBatchDTO> reportForBatchDTO = new ArrayList<>();
+
+		try (Connection conn = DBUtil.provideConnection()) {
+
+			PreparedStatement ps = conn.prepareStatement(
+					"select cp.dayNumber,cp.status,c.courseId,c.courseName,b.batchId,b.batchName,f.facultyId,f.facultyName from coursePlan cp INNER JOIN batch b ON cp.batchId=b.batchId INNER JOIN course c ON c.courseId=b.courseId INNER JOIN faculty f ON f.facultyId=b.facultyId group by batchId");
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+
+				int dayNumber = rs.getInt("dayNumber");
+				String status = rs.getString("status");
+
+				int courseId = rs.getInt("courseId");
+				String courseName = rs.getString("courseName");
+
+				int batchId = rs.getInt("batchId");
+				String batchName = rs.getString("batchName");
+
+				int facultyId = rs.getInt("facultyId");
+				String facultyName = rs.getString("facultyName");
+
+				ReportForBatchDTO dto = new ReportForBatchDTO(dayNumber, status, courseId, courseName, batchId,
+						batchName, facultyId, facultyName);
+
+				reportForBatchDTO.add(dto);
+
+			}
+
+		} catch (SQLException e) {
+			throw new BatchException(e.getMessage());
+		}
+
+		if (reportForBatchDTO.isEmpty())
+			throw new BatchException("Empty Course Plan!" + "\nPlease Allocate Batch to Course Plan...");
+
+		return reportForBatchDTO;
+
+	}
+	
+	public List<Batch> availableBatch() throws BatchException{
+		
+		List<Batch> batches = new ArrayList<Batch>();
+
+		try (Connection conn = DBUtil.provideConnection()) {
+
+			PreparedStatement ps = conn.prepareStatement("select * from batch");
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+
+				int bid = rs.getInt("batchId");
+				String batchName = rs.getString("batchName");
+
+				Batch batch = new Batch();
+
+				batch.setBatchId(bid);
+				batch.setBatchName(batchName);
+
+				batches.add(batch);
+			}
+
+		} catch (SQLException e) {
+			throw new BatchException(e.getMessage());
+		}
+
+		if (batches.size() == 0)
+			throw new BatchException("Empty!");
+
+		return batches;
+		
 	}
 
 }

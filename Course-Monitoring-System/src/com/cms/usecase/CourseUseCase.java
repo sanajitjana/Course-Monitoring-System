@@ -47,10 +47,13 @@ public class CourseUseCase {
 		} catch (InputMismatchException e) {
 			// TODO Auto-generated catch block
 
-			System.out.println("\nCourse fee is numeric!");
+			System.out.println("\nInvalid input!");
 
 			System.out.println("\nTry again...");
 			UserActivity.courseOptions();
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
 
 		System.out.println("Enter course description");
@@ -90,10 +93,10 @@ public class CourseUseCase {
 		String old_name = sc.next();
 
 		try {
-			boolean res = dao.isNameUnique(old_name);
+			boolean res = dao.isCourseNameAvailable(old_name);
 
-			if (res) {
-				System.out.println("\nThis course name already exists!");
+			if (res==false) {
+				System.out.println("\nThis course is not exists!");
 
 				System.out.println("\nTry again...");
 				UserActivity.courseOptions();

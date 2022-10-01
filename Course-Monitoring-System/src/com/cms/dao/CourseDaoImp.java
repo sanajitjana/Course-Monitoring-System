@@ -63,6 +63,29 @@ public class CourseDaoImp implements CourseDao {
 
 		return message;
 	}
+	
+	@Override
+	public boolean isCourseNameAvailable(String name) throws CourseException {
+
+		boolean result = false;
+
+		try (Connection conn = DBUtil.provideConnection()) {
+
+			PreparedStatement ps = conn.prepareStatement("select * from course where courseName=?");
+
+			ps.setString(1, name);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				result = true;
+			}
+
+		} catch (SQLException e) {
+			throw new CourseException(e.getMessage());
+		}
+
+		return result;
+	}
 
 	@Override
 	public String upadteCourseByName(String old_name, Course course) throws CourseException {

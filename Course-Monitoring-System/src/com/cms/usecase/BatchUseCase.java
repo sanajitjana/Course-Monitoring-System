@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.cms.bean.Batch;
+import com.cms.bean.ReportForBatchDTO;
 import com.cms.dao.BatchDao;
 import com.cms.dao.BatchDaoImp;
 import com.cms.exceptions.BatchException;
@@ -313,6 +314,45 @@ public class BatchUseCase {
 	}
 
 	public static void coursePlanReportForEveryBatch() {
+
+		try {
+
+			List<ReportForBatchDTO> res = new BatchDaoImp().coursePlanReportForBatch();
+
+			System.out.println("\nDay wise course plan update of every batch");
+			System.out.println("--------------------------------------------\n");
+
+			res.forEach(dto -> {
+
+				System.out.println("Batch Name : " + dto.getBatchName());
+				System.out.println("Course Status : " + dto.getStatus());
+				System.out.println("Course Name : " + dto.getCourseName());
+				System.out.println("Faculty Name : " + dto.getFacultyName());
+
+				int day = dto.getDayNumber();
+				switch (day) {
+				case 1 -> System.out.println("Day Number : " + day + "(Monday)");
+				case 2 -> System.out.println("Day Number : " + day + "(TuesDay)");
+				case 3 -> System.out.println("Day Number : " + day + "(Wednesday)");
+				case 4 -> System.out.println("Day Number : " + day + "(Thursday)");
+				case 5 -> System.out.println("Day Number : " + day + "(Friday)");
+				case 6 -> System.out.println("Day Number : " + day + "(Satarday)");
+				case 7 -> System.out.println("Day Number : " + day + "(Sunday)");
+				}
+
+				System.out.println("============================\n");
+			});
+
+		} catch (BatchException e) {
+			System.out.println(e.getMessage());
+
+			System.out.println();
+			System.out.println("Try again...");
+			UserActivity.adminOptions();
+
+		}
+
+		UserActivity.adminOptions();
 
 	}
 

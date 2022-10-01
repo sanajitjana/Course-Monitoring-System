@@ -29,4 +29,12 @@ public interface CoursePlanDao {
 	// view course plan day wise for every batch.
 	public List<ReportDayWiseDTO> dayWiseCoursePlanForBatch() throws CoursePlanException;
 
+	// pending course plan
+	public List<CoursePlan> pendingCoursePlan() throws CoursePlanException;
+
+	// update course plan status
+	public String updateCoursePlanStatus(int id) throws CoursePlanException;
+
+	// before updating checking id is available and the status is pending or not
+	public boolean isIdAvaillableAndStatusPending(int id) throws CoursePlanException;
 }

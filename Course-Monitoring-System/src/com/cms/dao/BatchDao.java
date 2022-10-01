@@ -3,6 +3,7 @@ package com.cms.dao;
 import java.util.List;
 
 import com.cms.bean.Batch;
+import com.cms.bean.ReportForBatchDTO;
 import com.cms.exceptions.BatchException;
 
 public interface BatchDao {
@@ -27,5 +28,11 @@ public interface BatchDao {
 
 	// delete batch by name
 	public String batchDeleteByName() throws BatchException;
+
+	// view course plan report for every batch
+	public List<ReportForBatchDTO> coursePlanReportForBatch() throws BatchException;
+	
+	//all batches
+	public List<Batch> availableBatch() throws BatchException;
 
 }
