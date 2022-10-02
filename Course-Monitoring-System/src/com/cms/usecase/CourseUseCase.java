@@ -161,7 +161,7 @@ public class CourseUseCase {
 
 				System.out.println("Course ID : " + c.getCourseId());
 				System.out.println("Course Name : " + c.getCourseName());
-				System.out.println("Course Address : " + c.getFee());
+				System.out.println("Course Fee : " + c.getFee());
 				System.out.println("Course Description : " + c.getCourseDescription());
 
 				System.out.println("==================================");
