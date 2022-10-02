@@ -1,9 +1,9 @@
 # Course Monitoring System
 
-## Admin Login
+## Description
 
-![image](https://user-images.githubusercontent.com/76105799/193370670-63a7c452-a55b-4be8-93bd-d47f213a99cc.png)
+`Course Monitoring Systems` is used to monitor the course in a organization, helps system administrators monitor their infrastructure.
 
-## ER Diagram
+In an educational Institute there are several courses running parallel every day. For every course there are several batches at same/different time. Every course has a session wise/day wise schedule. It will be difficult for the Faculty Head to know the status of every batch i.e what is the session taught at each day in a batch.
 
-![ER-Diagram](https://user-images.githubusercontent.com/76105799/193432854-0498ebae-d3c8-4e83-b7db-6d364e88c30c.png)
+So the Automated Course Monitoring System will keep the records of all the courses, batches, faculties and the daywise update for every batch. It will also help the faculty head to maintain the course plan.
