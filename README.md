@@ -16,20 +16,16 @@ So the Automated Course Monitoring System will keep the records of all the cours
 
 ## Features
 
-1. User can sign in our website by giving small details like- name, email id etc.
+1. Basic authentication of various user accounts (admin, faculty).
+2. User can log in by filling in the required credentials and after the authentication, the user can enjoy the services.
+3. Both users have different options to perform. Admin can register faculty, and then faculty can access his/her options.
+4. Here, admin and faculty perform CURD (create record/row, update the record, read/view this, and also can delete such.)
+5. Admin can create course plan but only faculty can fill up the status for the course (strictly secure).
 
-2. User can login by filling the credentials whatever he or she given during sign up, then user will be authenticated by or website. after the authentification user can enjoy or services.
+## Learning
 
-3. After the login user can see the all types of services provided by us so the user can choose services by their choices.
-
-4. User can also see the customer stories about our services in the Resource section , in this section user also can see the Blogs of the some renowned persons experiences .
-
-5. In the product page user can see the all kinds of services provided by us in our website.
-
-## Gain Knowledge
-
-- Gain excessive knowledge on application of HTML , CSS & JS .
-- Got to know how to collabrate with team members.
+- Gain excessive knowledge to make an application usining Java, JDBC, MySQL.
+- Got to know selft-learning and research of the various tools and technologies.
 - Enjoyed the process of learning and creating the product.
 
 ## Screenshots
