@@ -1,0 +1,12 @@
+package com.cms.bean;
+
+public class Batch {
+	
+	private int batchId;	
+	private int courseId;
+	private int facultyId;
+	private int numberOfStudents;
+	private String batchStartDate;
+	private String duration;
+
+}

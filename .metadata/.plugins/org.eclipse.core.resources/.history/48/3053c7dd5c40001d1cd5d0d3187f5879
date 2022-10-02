@@ -1,0 +1,22 @@
+package com.cms.dao;
+
+import java.util.List;
+
+public interface BatchDao {
+
+	// checking course name unique or not
+//	public boolean isNameUnique(String name) throws BatchException;
+
+	// create course
+	public String createBatch(Batch batch) throws BatchException;
+
+	// update course by name
+	public String upadteCourseByName(String old_name, Batch batch) throws BatchException;
+
+	// view all courses details
+	public List<Batch> viewAllCourseDetails() throws BatchException;
+
+	// delete course by name
+	public String courseDeleteByName() throws BatchException;
+
+}

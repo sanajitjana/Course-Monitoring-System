@@ -1,0 +1,36 @@
+package com.cms.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+import com.cms.bean.Admin;
+import com.cms.exceptions.AdminExceptions;
+import com.cms.utility.DBUtil;
+
+public class AdminDaoImp implements AdminDao{
+
+	@Override
+	public Admin loginAdmin(String username, String password) throws AdminExceptions {		
+
+		//initializing admin object as null
+		Admin admin=null;
+		
+		
+		try(Connection conn=DBUtil.provideConnection()){
+			
+		PreparedStatement ps= conn.prepareStatement("select * from admin where username=? AND password=?");
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
+		//return admin object
+		return admin;
+	}
+
+	
+
+	
+
+}

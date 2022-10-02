@@ -1,0 +1,11 @@
+package com.cms.dao;
+
+import com.cms.bean.Course;
+
+public interface CourseDao {
+	
+	public String courseCreate(Course course);
+	
+	public String registerStudent2(Student student);
+
+}

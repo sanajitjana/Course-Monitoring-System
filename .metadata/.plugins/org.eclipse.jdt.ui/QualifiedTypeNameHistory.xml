@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.net.ConnectException"/>
+    <fullyQualifiedTypeName name="java.sql.DriverManager"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="com.cms.dao.AdminDao"/>
+    <fullyQualifiedTypeName name="com.cms.bean.Admin"/>
+    <fullyQualifiedTypeName name="com.cms.exceptions.AdminExceptions"/>
+    <fullyQualifiedTypeName name="java.sql.SQLException"/>
+    <fullyQualifiedTypeName name="com.cms.dao.AdminDaoImp"/>
+    <fullyQualifiedTypeName name="com.cms.usecase.AdminLogin"/>
+    <fullyQualifiedTypeName name="com.cms.start.UserRoot"/>
+    <fullyQualifiedTypeName name="com.cms.usecase.CourseUseCase"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="com.cms.utility.DBUtil"/>
+    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+    <fullyQualifiedTypeName name="com.cms.dao.FacultyDao"/>
+    <fullyQualifiedTypeName name="com.cms.usecase.FacultyUseCase"/>
+    <fullyQualifiedTypeName name="com.cms.bean.Faculty"/>
+    <fullyQualifiedTypeName name="com.cms.start.UserActivity"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="com.cms.dao.FacultyDaoImp"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="com.cms.exceptions.FacultyException"/>
+    <fullyQualifiedTypeName name="com.cms.bean.Course"/>
+    <fullyQualifiedTypeName name="com.cms.dao.CourseDaoImp"/>
+    <fullyQualifiedTypeName name="java.lang.IncompatibleClassChangeError"/>
+    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
+    <fullyQualifiedTypeName name="java.lang.Exception"/>
+    <fullyQualifiedTypeName name="com.cms.exceptions.CoursePlan"/>
+    <fullyQualifiedTypeName name="com.cms.dao.CourseDao"/>
+    <fullyQualifiedTypeName name="com.cms.bean.CoursePlan"/>
+    <fullyQualifiedTypeName name="com.cms.exceptions.CoursePlanException"/>
+    <fullyQualifiedTypeName name="java.lang.Override"/>
+    <fullyQualifiedTypeName name="com.cms.usecase.CoursePlanUseCase"/>
+    <fullyQualifiedTypeName name="com.cms.usecase.BatchUseCase"/>
+    <fullyQualifiedTypeName name="com.cms.bean.ReportDayWiseDTO"/>
+    <fullyQualifiedTypeName name="com.cms.bean.ReportForBatchDTO"/>
+    <fullyQualifiedTypeName name="com.cms.exceptions.CourseException"/>
+    <fullyQualifiedTypeName name="com.cms.bean.Batch"/>
+    <fullyQualifiedTypeName name="com.cms.dao.BatchDaoImp"/>
+    <fullyQualifiedTypeName name="com.cms.exceptions.BatchException"/>
+    <fullyQualifiedTypeName name="java.util.InputMismatchException"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="com.cms.dao.CoursePlanDaoImp"/>
+</qualifiedTypeNameHistroy>

@@ -1,0 +1,9 @@
+package com.cms.dao;
+
+import com.cms.bean.Admin;
+
+public interface AdminDao {
+	
+	public Admin loginStudent(String username, String password)throws StudentException;
+
+}

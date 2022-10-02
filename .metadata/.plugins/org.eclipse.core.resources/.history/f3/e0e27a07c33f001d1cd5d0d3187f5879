@@ -1,0 +1,15 @@
+package com.cms.dao;
+
+import com.cms.bean.Faculty;
+import com.cms.exceptions.FacultyException;
+
+public interface FacultyDao {
+	
+	//login faculty
+	public Faculty loginFaculty(String username,String password)throws FacultyException;
+	
+	
+	//logout faculty
+	public void logoutFaculty() throws FacultyException;
+
+}

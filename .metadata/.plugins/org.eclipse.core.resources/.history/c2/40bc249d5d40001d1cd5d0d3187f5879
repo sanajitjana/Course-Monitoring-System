@@ -1,0 +1,9 @@
+package com.cms.exceptions;
+
+public class BatchException {
+	
+	public BatchException() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

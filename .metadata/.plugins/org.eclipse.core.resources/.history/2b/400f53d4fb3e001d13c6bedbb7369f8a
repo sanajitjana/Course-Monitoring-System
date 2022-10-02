@@ -1,0 +1,25 @@
+package com.cms.start;
+
+import java.util.Scanner;
+
+public class AdminActivity {
+	
+	public static void adminOptions() {
+		
+		System.out.println("1. Create, Update, View Course.\r\n"
+				+ "2. Create, Update, View Batch. A batch is related to a course. \r\n"
+				+ "3. Create, Update, View Faculty.\r\n"
+				+ "4. Allocate faculty to a batch.\r\n"
+				+ "5. Create, Update, View Course plan.\r\n"
+				+ "6. View the Day wise update of every batch.\r\n"
+				+ "7. Generate Report for every batch.\r\n"
+				+ "");
+		
+		System.out.println();
+		System.out.println("Enter any number from above");
+		
+		Scanner sc=new Scanner(System.in);
+		
+	}
+
+}

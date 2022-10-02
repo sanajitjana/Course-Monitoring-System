@@ -1,0 +1,12 @@
+package com.cms.exceptions;
+
+public class AdminExceptions extends Exception{
+	
+	public AdminExceptions() {
+	}
+	
+	public AdminExceptions(String message) {
+		super(message);
+	}
+
+}

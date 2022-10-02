@@ -1,0 +1,5 @@
+package com.cms.exceptions;
+
+public class CoursePlan {
+
+}

@@ -1,0 +1,9 @@
+package com.cms.exceptions;
+
+public class AdminExceptions extends Exception{
+	
+	@Override
+	public AdminExceptions() {
+	}
+
+}

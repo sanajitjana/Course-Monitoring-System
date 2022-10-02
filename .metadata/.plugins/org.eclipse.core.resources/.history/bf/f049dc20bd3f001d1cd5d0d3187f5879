@@ -1,0 +1,7 @@
+package com.cms.dao;
+
+public interface CourseDao {
+	
+	public Course courseCreate()
+
+}

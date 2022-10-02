@@ -1,0 +1,30 @@
+package com.cms.dao;
+
+import java.util.List;
+
+import com.cms.bean.Course;
+import com.cms.bean.Faculty;
+import com.cms.exceptions.FacultyException;
+
+public interface FacultyDao {
+	
+	//login faculty
+	public Faculty loginFaculty(String username,String password)throws FacultyException;
+	
+	
+	//logout faculty
+	public void logoutFaculty() throws FacultyException;
+	
+	
+	//create faculty
+		public String createCourse(Course course);
+		
+		
+		//update course by name
+		public String upadteCourseByName();
+		
+		
+		//view all courses details
+		public List<Course> viewAllCourseDetails()throws CourseException;
+
+}

@@ -1,0 +1,18 @@
+package com.cms.start;
+
+public class AdminActivity {
+	
+	public static void adminOptions() {
+		
+		System.out.println("1. Create, Update, View Course.\r\n"
+				+ "2. Create, Update, View Batch. A batch is related to a course. \r\n"
+				+ "3. Create, Update, View Faculty.\r\n"
+				+ "•	Allocate faculty to a batch.\r\n"
+				+ "•	Create, Update, View Course plan.\r\n"
+				+ "•	View the Day wise update of every batch.\r\n"
+				+ "•	 Generate Report for every batch.\r\n"
+				+ "");
+		
+	}
+
+}

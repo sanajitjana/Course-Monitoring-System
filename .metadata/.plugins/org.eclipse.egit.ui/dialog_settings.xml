@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.egit.ui.internal.staging.StagingView">
+		<item key="MAIN_SASH_FORM_ORIENTATION_VERTICAL" value="false"/>
+		<item key="HORIZONTAL_SASH_FORM_WEIGHT" value="200,200"/>
+		<item key="STAGING_SASH_FORM_WEIGHT" value="200,200"/>
+		<item key="sortItemState" value="false"/>
+	</section>
+	<section name="GitCommitMessageComponent">
+		<list key="D:\Masai School\Unit-5\SB-101-CW-Project\.git">
+			<item value="false"/>
+			<item value="sanajitjana &lt;dev.sanajitjana@gmail.com&gt;"/>
+			<item value="create project"/>
+			<item value="sanajitjana &lt;dev.sanajitjana@gmail.com&gt;"/>
+			<item value="1d0f107e9f93a86d7d7edefec3b9e6a3949d966c"/>
+			<item value="0"/>
+			<item value="false"/>
+			<item value=""/>
+		</list>
+	</section>
+</section>

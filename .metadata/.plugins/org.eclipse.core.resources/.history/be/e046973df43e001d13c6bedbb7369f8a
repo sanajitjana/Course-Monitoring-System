@@ -1,0 +1,13 @@
+package com.cms.exceptions;
+
+public class AdminExceptions extends Exception{
+	
+	public AdminExceptions() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public AdminExceptions(String message) {
+		// TODO Auto-generated constructor stub
+	}
+
+}

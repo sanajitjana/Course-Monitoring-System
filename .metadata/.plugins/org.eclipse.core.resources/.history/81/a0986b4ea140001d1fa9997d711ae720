@@ -1,0 +1,11 @@
+package com.cms.bean;
+
+public class CoursePlan {
+	
+	 private int planId;
+	 private int batchId;
+	 private int dayNumber;
+	 private String topic;
+	 private String status;
+
+}

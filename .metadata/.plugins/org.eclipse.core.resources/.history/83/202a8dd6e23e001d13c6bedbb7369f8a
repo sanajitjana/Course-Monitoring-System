@@ -1,0 +1,9 @@
+package com.cms.utility;
+
+public class CheckDBConnetion {
+
+	public static void main(String[] args) {
+
+	}
+
+}

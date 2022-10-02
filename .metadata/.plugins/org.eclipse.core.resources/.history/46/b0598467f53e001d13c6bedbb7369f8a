@@ -1,0 +1,10 @@
+package com.cms.dao;
+
+import com.cms.bean.Admin;
+import com.cms.exceptions.AdminExceptions;
+
+public interface AdminDao {
+	
+	public Admin loginAdmin(Admin admin)throws AdminExceptions;
+
+}

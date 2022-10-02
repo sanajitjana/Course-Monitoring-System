@@ -1,0 +1,9 @@
+package com.cms.dao;
+
+public interface CourseDao {
+	
+	public String courseCreate(Course course);
+	
+	public String registerStudent2(Student student);
+
+}

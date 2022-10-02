@@ -1,0 +1,9 @@
+package com.cms.start;
+
+public class AdminActivity {
+	
+	public static adminOptions() {
+		
+	}
+
+}

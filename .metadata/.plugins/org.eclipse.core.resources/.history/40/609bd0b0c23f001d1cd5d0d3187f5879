@@ -1,0 +1,18 @@
+package com.cms.dao;
+
+import com.cms.bean.Course;
+
+public interface CourseDao {
+	
+	//create course
+	public String createCourse(Course course);
+	
+	
+	//update course
+	public String upadteCourse();
+	
+	
+	//view all courses
+	public List<Course> getAllStudentDetails()throws CourseException;
+
+}

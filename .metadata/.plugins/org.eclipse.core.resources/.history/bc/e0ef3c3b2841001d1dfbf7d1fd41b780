@@ -1,0 +1,38 @@
+package com.cms.bean;
+
+public class ReportDayWiseDTO {
+
+	// coursePlan
+	private int dayNumber;
+
+	// course
+	private int courseId;
+	private String courseName;
+
+	// batch
+	private int batchId;
+	private String batchName;
+
+	// faculty
+	private int facultyId;
+	private String facultyName;
+
+	public ReportDayWiseDTO() {
+		super();
+	}
+
+	public ReportDayWiseDTO(int dayNumber, int courseId, String courseName, int batchId, String batchName,
+			int facultyId, String facultyName) {
+		super();
+		this.dayNumber = dayNumber;
+		this.courseId = courseId;
+		this.courseName = courseName;
+		this.batchId = batchId;
+		this.batchName = batchName;
+		this.facultyId = facultyId;
+		this.facultyName = facultyName;
+	}
+
+//	select cp.dayNumber,c.courseId,c.courseName,b.batchId,b.batchName,f.facultyId,f.facultyName from coursePlan cp INNER JOIN batch b ON cp.batchId=b.batchId INNER JOIN course c ON c.courseId=b.courseId INNER JOIN faculty f ON f.facultyId=b.facultyId group by batchId;
+
+}

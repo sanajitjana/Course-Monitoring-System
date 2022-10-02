@@ -1,0 +1,26 @@
+package com.cms.bean;
+
+public class Batch {
+	
+	private int batchId;	
+	private int courseId;
+	private int facultyId;
+	private int numberOfStudents;
+	private String batchStartDate;
+	private String duration;
+	
+	
+	public Batch(int batchId, int courseId, int facultyId, int numberOfStudents, String batchStartDate,
+			String duration) {
+		super();
+		this.batchId = batchId;
+		this.courseId = courseId;
+		this.facultyId = facultyId;
+		this.numberOfStudents = numberOfStudents;
+		this.batchStartDate = batchStartDate;
+		this.duration = duration;
+	}
+	
+	
+
+}
