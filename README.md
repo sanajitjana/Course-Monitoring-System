@@ -34,8 +34,6 @@ So the Automated Course Monitoring System will keep the records of all the cours
 
 ## Screenshots
 
-<img align="left" alt="Coding" width="500" src="https://user-images.githubusercontent.com/76105799/193437657-0ba75f8a-b89b-4407-88f8-43cd4e69fc40.png">
-
-<img align="left" alt="Coding" width="500" src="https://user-images.githubusercontent.com/76105799/193437745-a92f7d7f-802d-4f61-9933-2a2e94e2123e.png">
+<img align="left" alt="Coding" src="https://user-images.githubusercontent.com/76105799/193437657-0ba75f8a-b89b-4407-88f8-43cd4e69fc40.png">
 
 <img align="left" alt="Coding" src="https://user-images.githubusercontent.com/76105799/193437820-57921009-d8ce-48b5-a9e3-2511413870ab.png">
