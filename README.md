@@ -50,4 +50,4 @@ So the Automated Course Monitoring System will keep the records of all the cours
 
 This project is licensed under the MIT License - see the [LICENSE.md](./LICENSE) file for details.
 
-### Thanks for reading this article ❤️
+#### Thanks for reading this article ❤️
