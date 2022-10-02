@@ -1,4 +1,15 @@
-# Course Monitoring System
+<h1 align="center" style="font-size:35px">
+  <b>Course Monitoring System</b>
+</h1>
+<p align="center">
+  This is my first construct week project at <a href="http://masaischool.com/" target="_blank">Masai School</a> using Java, JDBC, and MySQL technology. Check out my <a href="https://sanajitjana.github.io" target="_blank">Portfolio</a>
+</p>
+
+<p align="center">
+  :star: Star me on this repo — it means a lot to me!
+</p>
+
+<br/>
 
 <img align="right" alt="Coding" width="400" src="https://user-images.githubusercontent.com/76105799/193437482-ca30d43e-4da0-43d2-8123-97941007b6e1.png">
 
