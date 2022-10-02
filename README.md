@@ -2,7 +2,9 @@
   <b>Course Monitoring System</b>
 </h1>
 <p align="center">
-  This is my first construct week project at <a href="http://masaischool.com/" target="_blank">Masai School</a> using Java, JDBC, and MySQL technology. Check out my <a href="https://sanajitjana.github.io" target="_blank">Portfolio</a>
+  This is my construct week project. made with Java, JDBC, and MySQL technology.
+  <br/>
+  Check out my <a href="https://sanajitjana.github.io" target="_blank">Portfolio</a>
 </p>
 
 <p align="center">
