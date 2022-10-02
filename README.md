@@ -45,3 +45,9 @@ So the Automated Course Monitoring System will keep the records of all the cours
 
 ![Admin Login](https://user-images.githubusercontent.com/76105799/193438208-c53e6eaa-25d2-4e64-8aa0-cf1ced5ce656.png)
 ![Database](https://user-images.githubusercontent.com/76105799/193437820-57921009-d8ce-48b5-a9e3-2511413870ab.png)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](./LICENSE) file for details.
+
+### Thanks for reading this article ❤️
